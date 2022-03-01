@@ -19,7 +19,7 @@
 
             <div class="input-group" id="datepicker1">
                 <input type="text" name="bill_date" class="form-control @error('bill_date') is-invalid @enderror"
-                    value="{{ $bill->bill_date->format('Y-m-d') }}" data-date-format="dd-mm-yyyy" data-date-container='#datepicker1'
+                    value="{{ $bill->bill_date->format('Y-m-d') }}" data-date-format="yyyy-mm-dd" data-date-container='#datepicker1'
                     data-provide="datepicker">
 
                 <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
