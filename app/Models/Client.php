@@ -36,7 +36,6 @@ class Client extends Model implements HasMedia
         'addresse',
         'rc',
         'ice',
-        'category_id',
         'description',
         'logo'
     ];
@@ -49,11 +48,6 @@ class Client extends Model implements HasMedia
     public function emails()
     {
         return $this->morphMany(Email::class, 'emailable');
-    }
-
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class);
     }
 
     public function invoicesAvoir()

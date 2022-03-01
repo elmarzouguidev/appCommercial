@@ -18,7 +18,7 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = app(ClientInterface::class)->__instance()->withCount('tickets')->get();
+        $clients = app(ClientInterface::class)->__instance()->withCount('invoices')->get();
 
         return view('theme.pages.Client.__datatable.index', compact('clients'));
     }
@@ -108,7 +108,7 @@ class ClientController extends Controller
     public function show(string $slug)
     {
 
-        $client = app(ClientInterface::class)->getClientByUuid($slug)->withCount('tickets')->firstOrFail();
+        $client = app(ClientInterface::class)->getClientByUuid($slug)->withCount('invoices')->firstOrFail();
 
         return view('theme.pages.Client.__profile.index', compact('client'));
     }
