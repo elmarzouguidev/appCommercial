@@ -2,7 +2,6 @@
 
 namespace App\Models\Utilities;
 
-use App\Models\Client;
 use App\Traits\GetModelByUuid;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
