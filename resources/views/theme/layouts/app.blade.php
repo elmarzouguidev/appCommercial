@@ -12,11 +12,10 @@
     <meta content="app_version" name="v 1.1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     @yield('css')
     <!-- App Css-->
-    <link href="{{ asset('css/app.css') }}?ver={{rand(1,250)}}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
 
     @livewireStyles
 
