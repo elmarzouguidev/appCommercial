@@ -23,12 +23,7 @@
                             <span key="t-factures">{{ __('navbar.commercial') }}</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li>
-                                <a href="{{ route('commercial:companies.index') }}" key="t-companies-list">
-                                    <i class="bx bx-building"></i>
-                                    {{ __('navbar.companies') }}
-                                </a>
-                            </li>
+        
                             <li>
                                 <a href="{{ route('commercial:estimates.index') }}" key="t-factures-devis">
                                     <i class="bx bx-file-blank"></i><span

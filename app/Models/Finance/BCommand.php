@@ -22,11 +22,6 @@ class BCommand extends Model
         return $this->belongsTo(Provider::class);
     }
 
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
-
     public function articles()
     {
         return $this->morphMany(Article::class, 'articleable');
@@ -64,19 +59,19 @@ class BCommand extends Model
 
         static::creating(function ($model) {
 
-            if ($model->company->bCommands->count() <= 0) {
-                //dd('OOO empty');
-                $number = $model->company->bcommand_start_number;
+            if (self::count() <= 0) {
+
+                $number = getDocumentStart()->bc_start;
             } else {
-                //dd('Not empty ooo');
-                $number = ($model->company->bCommands->max('code') + 1);
+
+                $number = ($model->max('code') + 1);
             }
 
             $code = str_pad($number, 5, 0, STR_PAD_LEFT);
 
             $model->code = $code;
 
-            $model->full_number = $model->company->prefix_bcommand . $code;
+            $model->full_number = getDocumentPrefix()->bc_prefix . $code;
         });
     }
 }

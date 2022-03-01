@@ -34,16 +34,6 @@ class InvoiceAvoir extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function ticket()
-    {
-        return $this->belongsTo(Ticket::class)->withDefault();
-    }
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class);
-    }
-
     public function articles()
     {
         return $this->morphMany(Article::class, 'articleable');
@@ -101,19 +91,20 @@ class InvoiceAvoir extends Model
 
         static::creating(function ($model) {
 
-            if ($model->company->invoicesAvoir->count() <= 0) {
-                //dd('OOO empty');
-                $number = $model->company->invoice_avoir_start_number;
+
+            if (self::count() <= 0) {
+
+                $number = getDocumentStart()->invoice_avoir_start;
             } else {
-                //dd('Not empty ooo');
-                $number = ($model->company->invoicesAvoir->max('code') + 1);
+
+                $number = ($model->max('code') + 1);
             }
 
-            $invoiceCode = str_pad($number, 5, 0, STR_PAD_LEFT);
+            $code = str_pad($number, 5, 0, STR_PAD_LEFT);
 
-            $model->code = $invoiceCode;
+            $model->code = $code;
 
-            $model->full_number = $model->company->prefix_invoice_avoir . $invoiceCode;
+            $model->full_number = getDocumentPrefix()->invoice_avoir_prefix . $code;
         });
     }
 }

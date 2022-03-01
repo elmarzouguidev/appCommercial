@@ -43,21 +43,6 @@ class Invoice extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function ticket()
-    {
-        return $this->belongsTo(Ticket::class)->withDefault();
-    }
-
-    public function tickets()
-    {
-        return $this->belongsToMany(Ticket::class, 'ticket_invoice', 'invoice_id', 'ticket_id');
-    }
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class)->withDefault();
-    }
-
     public function articles()
     {
         return $this->morphMany(Article::class, 'articleable');
@@ -223,19 +208,20 @@ class Invoice extends Model
 
         static::creating(function ($model) {
 
-            if ($model->company->invoices->count() <= 0) {
-                //dd('OOO empty');
-                $number = $model->company->invoice_start_number;
+
+            if (self::count() <= 0) {
+
+                $number = getDocumentStart()->invoice_start;
             } else {
-                //dd('Not empty ooo');
-                $number = ($model->company->invoices->max('code') + 1);
+
+                $number = ($model->max('code') + 1);
             }
 
-            $invoiceCode = str_pad($number, 5, 0, STR_PAD_LEFT);
+            $code = str_pad($number, 5, 0, STR_PAD_LEFT);
 
-            $model->code = $invoiceCode;
+            $model->code = $code;
 
-            $model->full_number = $model->company->prefix_invoice . $invoiceCode;
+            $model->full_number = getDocumentPrefix()->invoice_prefix . $code;
         });
     }
 }

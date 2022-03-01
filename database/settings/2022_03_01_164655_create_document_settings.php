@@ -6,17 +6,17 @@ class CreateDocumentSettings extends SettingsMigration
 {
     public function up(): void
     {
-        $this->migrator->add('invoice.prefix', 'FACT-');
-        $this->migrator->add('invoice.start', 1);
+        $this->migrator->add('document.invoice_prefix', 'FACT-');
+        $this->migrator->add('document.invoice_start', 1);
 
-        $this->migrator->add('invoice_avoir.prefix', 'AVOIR-');
-        $this->migrator->add('invoice_avoir.start', 11);
+        $this->migrator->add('document.invoice_avoir_prefix', 'AVOIR-');
+        $this->migrator->add('document.invoice_avoir_start', 11);
 
-        $this->migrator->add('estimate.prefix', 'DEVIS-');
-        $this->migrator->add('estimate.start', 1);
+        $this->migrator->add('document.estimate_prefix', 'DEVIS-');
+        $this->migrator->add('document.estimate_start', 1);
 
-        $this->migrator->add('bc.prefix', 'BC-');
-        $this->migrator->add('bc.start', 1);
+        $this->migrator->add('document.bc_prefix', 'BC-');
+        $this->migrator->add('document.bc_start', 1);
 
     }
 }
