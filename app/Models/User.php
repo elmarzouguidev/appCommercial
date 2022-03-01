@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Utilities\Delivery;
 use App\Traits\GetModelByUuid;
 use App\Traits\UuidGenerator;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -61,15 +60,5 @@ class User extends Authenticatable
         return new Attribute(
             fn () => $this->nom . ' ' . $this->prenom,
         );
-    }
-
-    public function tickets()
-    {
-        return $this->hasMany(Ticket::class);
-    }
-
-    public function deliveries()
-    {
-        return $this->hasMany(Delivery::class);
     }
 }

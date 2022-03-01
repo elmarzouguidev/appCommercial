@@ -9,7 +9,7 @@
 
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css"/>
 
 </head>
 
@@ -109,7 +109,7 @@
     </div>
 </div>
 
-<script src="{{ mix('js/app.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>

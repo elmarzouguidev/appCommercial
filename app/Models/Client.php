@@ -3,7 +3,6 @@
 namespace App\Models;
 
 
-use App\Models\Finance\Company;
 use App\Models\Finance\Invoice;
 use App\Models\Finance\InvoiceAvoir;
 use App\Models\Utilities\Email;
@@ -63,16 +62,6 @@ class Client extends Model implements HasMedia
     public function bills()
     {
         return $this->hasMany(Bill::class);
-    }
-
-    public function category()
-    {
-        return $this->belongsTo(Category::class)->withDefault();
-    }
-
-    public function company()
-    {
-        return $this->belongsTo(Company::class)->withDefault();
     }
 
     public function getEditAttribute()
