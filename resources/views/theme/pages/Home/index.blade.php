@@ -18,11 +18,6 @@
         @endrole
 
         <div class="row">
-
-            @include('theme.pages.Home.sections.section_a_orders')
-        </div>
-
-        <div class="row">
             @include('theme.pages.Home.sections.section_a_chart')
         </div>
 

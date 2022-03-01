@@ -28,7 +28,7 @@ class Bill extends Model
         'billable_type',
     ];
 
-    protected array $casts = [
+    protected  $casts = [
         'bill_date' => 'date:Y-m-d',
     ];
 

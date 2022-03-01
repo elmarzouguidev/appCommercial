@@ -23,7 +23,7 @@ class Invoice extends Model
 
     // protected $dates = ['due_date'];
 
-    protected array $casts = [
+    protected  $casts = [
         'due_date' => 'date:Y-m-d',
         'invoice_date' => 'date:Y-m-d',
     ];

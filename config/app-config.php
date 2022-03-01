@@ -18,11 +18,6 @@ return [
         'cache-live-time' => 30
     ],
 
-    'tickets' => [
-
-        'prefix' => 'TCK',
-    ],
-
     'clients' => [
 
         'prefix' => 'CLT',
@@ -43,7 +38,6 @@ return [
 
     'providers' => [
         'prefix' => 'FRNS-',
-
     ],
 
 ];

@@ -43,7 +43,7 @@
 
         @include('theme.layouts._parts.__header')
 
-        @include('theme.layouts._parts._leftSidebar')
+        @include('theme.layouts._parts._leftSidebar_commercial')
 
         <div class="main-content">
 
@@ -54,12 +54,7 @@
                 @yield('content')
 
             </div>
-            <!-- End Page-content -->
-
-            <!-- Transaction Modal -->
-            @include('theme.layouts._parts._modal')
-            <!-- end modal -->
-
+      
             <!-- subscribeModal -->
 
             {{-- @include('theme.layouts._parts._subscribe') --}}

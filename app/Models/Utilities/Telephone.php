@@ -32,7 +32,7 @@ class Telephone extends Model
      *
      * @var array
      */
-    protected array $casts = [
+    protected  $casts = [
         //'email_verified_at' => 'datetime',
     ];
 

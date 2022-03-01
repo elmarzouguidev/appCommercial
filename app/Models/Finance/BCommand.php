@@ -13,7 +13,7 @@ class BCommand extends Model
     use UuidGenerator;
     use GetModelByUuid;
 
-    protected array $casts = [
+    protected  $casts = [
         'date_command' => 'date:Y-m-d',
     ];
 

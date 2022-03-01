@@ -24,7 +24,6 @@
         "spatie/laravel-medialibrary": "^9.0.0",
         "spatie/laravel-permission": "^5.4",
         "spatie/laravel-query-builder": "^4.0",
-        "spatie/laravel-searchable": "^1.11",
         "spatie/laravel-settings": "^2.3"
     },
     "require-dev": {
@@ -43,8 +42,7 @@
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/",
-            "Elmarzougui\\": "packages/"
+            "Database\\Seeders\\": "database/seeders/"
         }
 
     },

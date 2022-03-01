@@ -37,11 +37,11 @@ class Estimate extends Model
         'active'
     ];
 
-    protected array $with = [];
+    protected  $with = [];
 
     //protected $dates = ['due_date', 'estimate_date'];
 
-    protected array  $casts = [
+    protected   $casts = [
         'is_send' => 'boolean',
         'due_date' => 'date:Y-m-d',
         'estimate_date' => 'date:Y-m-d',

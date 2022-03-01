@@ -26,7 +26,6 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['theme.layouts._parts._leftSidebar','theme.layouts._parts._leftSidebar_commercial'], TicketComposer::class);
         View::composer(['theme.layouts._parts._leftSidebar','theme.layouts._parts._leftSidebar_commercial'], EstimateComposer::class);
     }
 }
