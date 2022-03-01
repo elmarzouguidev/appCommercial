@@ -16,12 +16,6 @@ class PermissionSeeder extends Seeder
 
     protected $permissions = [
 
-        ['name' => 'ticket.browse', 'guard_name' => 'admin'],
-        ['name' => 'ticket.read', 'guard_name' => 'admin'],
-        ['name' => 'ticket.create', 'guard_name' => 'admin'],
-        ['name' => 'ticket.edit', 'guard_name' => 'admin'],
-        ['name' => 'ticket.delete', 'guard_name' => 'admin'],
-
         ['name' => 'client.browse', 'guard_name' => 'admin'],
         ['name' => 'client.read', 'guard_name' => 'admin'],
         ['name' => 'client.create', 'guard_name' => 'admin'],
