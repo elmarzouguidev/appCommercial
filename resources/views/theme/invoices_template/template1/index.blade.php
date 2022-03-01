@@ -146,7 +146,7 @@
                 <table>
                     <tr>
                         <td class="title" style="text-align: center;">
-                            <img src="{{ $companyLogo }}" alt="{{ optional($invoice->company)->name }}"
+                            <img src="{{ $companyLogo }}" alt="{{ optional(getCompany())->name }}"
                                 {{--style="width: 100%; height: 30%"--}}/>
                         </td>
 
@@ -238,18 +238,18 @@
 
 <div style="position: fixed; bottom: 0; width: 100%;">
     <div style="text-align: center; color:#333; font-size: 14px">
-        <p>{{ optional($invoice->company)->name }}</p>
+        <p>{{ optional(getCompany())->name }}</p>
         <p>
-            {{ optional($invoice->company)->addresse }}
-            Tel : {{ optional($invoice->company)->telephone }}
-            E-mail : {{ optional($invoice->company)->email }}
+            {{ optional(getCompany())->addresse }}
+            Tel : {{ optional(getCompany())->telephone }}
+            E-mail : {{ optional(getCompany())->email }}
         </p>
         <p>
-            -R.C:{{ optional($invoice->company)->rc }}
-            -PATENTE:{{ optional($invoice->company)->patente }}
-            -I.F:{{ optional($invoice->company)->if }}
-            -CNSS:{{ optional($invoice->company)->cnss }}
-            -ICE:{{ optional($invoice->company)->ice }}
+            -R.C:{{ optional(getCompany())->rc }}
+            -PATENTE:{{ optional(getCompany())->patente }}
+            -I.F:{{ optional(getCompany())->if }}
+            -CNSS:{{ optional(getCompany())->cnss }}
+            -ICE:{{ optional(getCompany())->ice }}
         </p>
     </div>
     <div class="bott" style=" width: 100%;">

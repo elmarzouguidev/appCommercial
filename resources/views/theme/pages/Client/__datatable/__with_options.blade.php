@@ -30,7 +30,6 @@
                             <th scope="col">Email</th>
                             <th scope="col">ICE</th>
                             <th scope="col">RC</th>
-                            <th scope="col">Tickets</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -67,9 +66,7 @@
                                 <td>
                                     {{ $client->rc }}
                                 </td>
-                                <td>
-                                    {{ $client->tickets_count }}
-                                </td>
+        
                                 <td>
                                     <div class="d-flex gap-3">
 

@@ -1,15 +1,15 @@
 <?php
 
+use App\Settings\CompanySettings;
 use App\Settings\DocumentSettings;
 
 
-function getDocumentPrefix(): DocumentSettings
+function getDocument(): DocumentSettings
 {
     return app(DocumentSettings::class);
 }
 
-function getDocumentStart(): DocumentSettings
+function getCompany(): CompanySettings
 {
-    return app(DocumentSettings::class);
+    return app(CompanySettings::class);
 }
-

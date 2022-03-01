@@ -229,27 +229,27 @@
     </table>
 </div>
 
-@if(isset($invoice->condition_general))
+@if(isset($command->condition_general))
     <div style="text-align: left;font-size: 12px;color:black">
         <p>Condition général</p>
-        <p>{{$estimate->condition_general}}</p>
+        <p>{{$command->condition_general}}</p>
     </div>
 @endif
 
 <div style="position: fixed; bottom: 0; width: 100%;">
     <div style="text-align: center; color:#333; font-size: 14px">
-        <p>{{ optional($command->company)->name }}</p>
+        <p>{{ optional(getCompany())->name }}</p>
         <p>
-            {{ optional($command->company)->addresse }}
-            Tel : {{ optional($command->company)->telephone }}
-            E-mail : {{ optional($command->company)->email }}
+            {{ optional(getCompany())->addresse }}
+            Tel : {{ optional(getCompany())->telephone }}
+            E-mail : {{ optional(getCompany())->email }}
         </p>
         <p>
-            -R.C:{{ optional($command->company)->rc }}
-            -PATENTE:{{ optional($command->company)->patente }}
-            -I.F:{{ optional($command->company)->if }}
-            -CNSS:{{ optional($command->company)->cnss }}
-            -ICE:{{ optional($command->company)->ice }}
+            -R.C:{{ optional(getCompany())->rc }}
+            -PATENTE:{{ optional(getCompany())->patente }}
+            -I.F:{{ optional(getCompany())->if }}
+            -CNSS:{{ optional(getCompany())->cnss }}
+            -ICE:{{ optional(getCompany())->ice }}
         </p>
     </div>
     <div class="bott" style=" width: 100%;">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Commercial\Bill;
 
+use App\Constants\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Commercial\Bill\BillFormRequest;
 use App\Http\Requests\Commercial\Bill\BillInvoiceFormRequest;
@@ -87,7 +88,7 @@ class BillController extends Controller
 
         $invoice->bill()->create($biller);
 
-        $invoice->update(['status' => 'paid', 'is_paid' => true]);
+        $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
 
         return redirect()->route('commercial:bills.index');
     }
@@ -125,7 +126,7 @@ class BillController extends Controller
 
             $bill->delete();
 
-            $invoice->update(['status' => 'non-paid']);
+            $invoice->update(['status' => Response::INVOICE_NON_PAID]);
 
             return redirect()->back()->with('success', "Le reglement  a éte supprimer avec success");
         }

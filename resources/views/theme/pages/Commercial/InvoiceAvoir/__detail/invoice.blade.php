@@ -7,7 +7,7 @@
                     <h4 class="float-end font-size-16">FACTURE  N° : {{ $invoice->invoice_number }}</h4><br>
                     <div class="mb-4">
                         @php
-                            $logo = $invoice->company->logo ? asset('storage/' . $invoice->company->logo) : asset('storage/company-logo/default.png');
+                            $logo = asset('storage/company/' . getCompany()->logo);
                         @endphp
                         <img src="{{ $logo }}" alt="logo" height="50"/>
                     </div>
@@ -24,11 +24,11 @@
                     </div>
                     <div class="col-sm-6 text-sm-end">
                         <address class="mt-2 mt-sm-0">
-                            <strong>{{ optional($invoice->company)->name }}</strong><br>
+                            <strong>{{ optional(getCompany())->name }}</strong><br>
 
-                            Adresse : {{ optional($invoice->company)->addresse }}
+                            Adresse : {{ optional(getCompany())->addresse }}
                             <br>
-                            ICE : {{ optional($invoice->company)->ice }}
+                            ICE : {{ optional(getCompany())->ice }}
                             <br>
                         </address>
                     </div>

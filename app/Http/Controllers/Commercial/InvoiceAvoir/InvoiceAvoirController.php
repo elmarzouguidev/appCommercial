@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Repositories\Client\ClientInterface;
-use App\Repositories\Company\CompanyInterface;
 
 class InvoiceAvoirController extends Controller
 {
@@ -30,16 +29,15 @@ class InvoiceAvoirController extends Controller
                 ->allowedFilters([
                     //'company_id'
                     //AllowedFilter::exact('etat')
-                    AllowedFilter::scope('GetCompany', 'filters_companies'),
                     AllowedFilter::scope('GetStatus', 'filters_status'),
 
                 ])
-                ->with(['company', 'client'])
+                ->with(['client'])
                 ->get()
                 ->appends(request()->query());
             //->get();
         } else {
-            $invoices = InvoiceAvoir::with(['company:id,name,logo', 'client:id,entreprise'])
+            $invoices = InvoiceAvoir::with(['client:id,entreprise'])
                 ->get();
         }
         //$invoicesBills = Invoice::has('bill')->get();
@@ -52,12 +50,12 @@ class InvoiceAvoirController extends Controller
     {
 
         $clients = app(ClientInterface::class)->getClients(['id', 'entreprise', 'contact']);
-        $companies = app(CompanyInterface::class)->getCompanies(['id', 'name']);
+
         $invoices = Invoice::select('id', 'code', 'full_number')
             ->doesntHave('avoir')
             ->get();
 
-        return view('theme.pages.Commercial.InvoiceAvoir.__create_avoir.index', compact('clients', 'companies', 'invoices'));
+        return view('theme.pages.Commercial.InvoiceAvoir.__create_avoir.index', compact('clients','invoices'));
     }
 
     public function store(AvoirFormRequest $request)
@@ -78,10 +76,8 @@ class InvoiceAvoirController extends Controller
         $invoice->invoice_number = $request->invoice_number;
 
         $invoice->invoice_date = $request->date('invoice_date');
-        // $invoice->due_date = $request->date('due_date');
 
         $invoice->admin_notes = $request->admin_notes;
-        //$invoice->client_notes = $request->client_notes;
         $invoice->condition_general = $request->condition_general;
 
         $invoice->price_ht = $totalPrice;
@@ -89,8 +85,6 @@ class InvoiceAvoirController extends Controller
         $invoice->price_tva = $this->calculateOnlyTva($totalPrice);
 
         $invoice->client_id = $request->client;
-        $invoice->company_id = $request->company;
-        $invoice->status = 'paid';
 
         $invoice->invoice()->associate($request->invoice_number);
         $invoice->invoice_number = $invoice->invoice->code;
@@ -99,7 +93,6 @@ class InvoiceAvoirController extends Controller
 
         $invoice->articles()->createMany($invoicesArticles);
 
-        // return redirect()->back();
         return redirect($invoice->edit_url)->with('success', "La Facture a été crée avec success");
     }
 
@@ -140,10 +133,8 @@ class InvoiceAvoirController extends Controller
         }
 
         $invoice->invoice_date = $request->date('invoice_date');
-        //$invoice->due_date = $request->date('due_date');
 
         $invoice->admin_notes = $request->admin_notes;
-        // $invoice->client_notes = $request->client_notes;
         $invoice->condition_general = $request->condition_general;
 
         $invoice->save();

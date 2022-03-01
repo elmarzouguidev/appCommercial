@@ -2,24 +2,6 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title mb-4">Filter</h4>
-
-            <div>
-                <h5 class="font-size-14 mb-3">Sociétés</h5>
-                <ul class="list-unstyled product-list">
-                    @foreach ($companies as $company)
-                        <div class="form-check mt-2">
-                            <input class="form-check-input chk-filter" type="radio" name="company"
-                                id="company-{{ $company->id }}" value="{{ $company->id }}"
-                                {{ in_array($company->id, explode(',', request()->input('appFilter.GetCompany'))) ? 'checked' : '' }}>
-
-                            <label class="form-check-label" for="company-{{ $company->id }}">
-                                {{ $company->name }}
-                            </label>
-                        </div>
-                    @endforeach
-                </ul>
-            </div>
-
             <div class="mt-4 pt-3">
                 <h5 class="font-size-14 mb-3">Status</h5>
                 <div class="form-check mt-2">

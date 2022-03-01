@@ -35,11 +35,6 @@ class InvoiceUpdateFormRequest extends FormRequest
         return [
 
             'client' => ['required', 'integer'],
-            'company' => ['required', 'integer'],
-
-            'ticket' => ['nullable', 'integer'],
-
-            'tickets' => ['nullable', 'array'],
 
             'bl_code' => ['nullable', 'numeric'],
             'bc_code' => ['nullable', 'numeric'],
@@ -50,7 +45,6 @@ class InvoiceUpdateFormRequest extends FormRequest
             'payment_method' => ['required', 'string', 'in:espece,virement,cheque'],
 
             'admin_notes' => ['nullable', 'string'],
-            //'client_notes' => ['nullable', 'string'],
             'condition_general' => ['nullable', 'string'],
 
             'articles' => ['nullable', 'array'],
@@ -58,7 +52,7 @@ class InvoiceUpdateFormRequest extends FormRequest
             'articles.*.description' => ['nullable', 'string'],
             'articles.*.quantity' => ['required', 'integer'],
             'articles.*.prix_unitaire' => ['required', 'numeric'],
-            //'articles.*.montant_ht' => ['nullable', 'numeric'],
+
         ];
     }
 }

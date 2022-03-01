@@ -42,35 +42,8 @@
                     allowClear: true
                 });
 
-                $('#selectticket').select2({
-                    placeholder: 'choisir le ticket',
-                    allowClear: true
-                });
-
-                $('#selectcompany').select2({
-                    placeholder: 'choisir la société',
-                    allowClear: true
-                });
             }
             initSelectCompanyDrop();
-
-            $('#selectclient').on('change', function (e) {
-                setTimeout(function () {
-                    livewire.emit('selectedClientItem', e.target.value)
-                     //console.log(e.target.value);
-                }, 3000);
-            });
-
-            $('#selectcompany').on('change', function (e) {
-                setTimeout(function () {
-                    livewire.emit('selectedCompanyItem', e.target.value)
-                    //console.log(e.target.value);
-                }, 3000);
-            });
-            window.livewire.on('select2', () => {
-                initSelectCompanyDrop();
-            });
-
         });
 
     </script>

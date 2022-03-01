@@ -28,12 +28,6 @@ class InvoiceFormRequest extends FormRequest
         return [
 
             'client' => ['required', 'integer'],
-            'company' => ['required', 'integer'],
-            'ticket' => ['nullable', 'integer'],
-
-            'tickets' => ['nullable', 'array'],
-
-            'invoice' => ['nullable', 'numeric'], //avoir invoice
 
             'bl_code' => ['nullable', 'numeric'],
             'bc_code' => ['nullable', 'numeric'],
@@ -43,7 +37,6 @@ class InvoiceFormRequest extends FormRequest
             'payment_method' => ['required', 'string', 'in:espece,virement,cheque'],
 
             'admin_notes' => ['nullable', 'string'],
-           // 'client_notes' => ['nullable', 'string'],
             'condition_general' => ['nullable', 'string'],
 
             'articles' => ['required', 'array'],
@@ -51,7 +44,6 @@ class InvoiceFormRequest extends FormRequest
             'articles.*.description' => ['nullable', 'string'],
             'articles.*.quantity' => ['required', 'integer'],
             'articles.*.prix_unitaire' => ['required', 'numeric'],
-            //'articles.*.montant_ht' => ['nullable', 'numeric'],
             'estimated' => ['nullable', 'uuid']
 
         ];

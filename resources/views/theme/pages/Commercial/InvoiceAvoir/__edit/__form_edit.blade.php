@@ -24,14 +24,14 @@
                                         <label>{{ __('invoice.form.date_invoice') }} *</label>
                                         <div class="input-group" id="datepicker1">
                                             <input type="text" name="invoice_date"
-                                                   class="form-control @error('invoice_date') is-invalid @enderror"
-                                                   value="{{ $invoice->invoice_date->format('Y-m-d') }}" data-date-format="yyyy-mm-dd"
-                                                   data-date-container='#datepicker1' data-provide="datepicker"
-                                                {{ $readOnly }}>
+                                                class="form-control @error('invoice_date') is-invalid @enderror"
+                                                value="{{ $invoice->invoice_date->format('Y-m-d') }}"
+                                                data-date-format="yyyy-mm-dd" data-date-container='#datepicker1'
+                                                data-provide="datepicker" {{ $readOnly }}>
 
                                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                                             @error('invoice_date')
-                                            <span class="invalid-feedback" role="alert">
+                                                <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
@@ -45,12 +45,11 @@
                             <div class=" mb-4">
                                 <label>{{ __('invoice.form.admin_note') }}</label>
                                 <textarea name="admin_notes" id="textarea"
-                                          class="form-control @error('admin_notes') is-invalid @enderror"
-                                          maxlength="225"
-                                          rows="7" {{ $readOnly }}>{{ $invoice->admin_notes }}</textarea>
+                                    class="form-control @error('admin_notes') is-invalid @enderror" maxlength="225"
+                                    rows="7" {{ $readOnly }}>{{ $invoice->admin_notes }}</textarea>
 
                                 @error('admin_notes')
-                                <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -68,15 +67,11 @@
                         <div class="col-lg-4 mb-4">
 
                         </div>
-                        <div class="col-lg-4 mb-4">
-
-                        </div>
 
                     </div>
                     <div class="row" id="articles_list">
                         <div class="col-lg-12 mb-4">
                             @include('theme.pages.Commercial.InvoiceAvoir.__edit.__edit_articles')
-                            {{-- @include('theme.pages.Commercial.InvoiceAvoir.__edit.__add_article') --}}
                         </div>
                         <div class="col-lg-12">
                             <div class="justify-content-end">
@@ -99,17 +94,11 @@
                                             Montant TVA : {{ $invoice->formated_total_tva }} DH
                                         </h5>
                                     </div>
-                                    {{-- <div class="card-body">
-                                        <h5 class="card-title">card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and
-                                            make up the bulk of the card's content.</p>
-                                    </div> --}}
+            
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{-- @livewire('commercial.invoice.create.articles') --}}
-
                 </div>
             </div>
             <div class="card mb-4">
@@ -119,10 +108,10 @@
                         <div class="mb-3 col-lg-12">
                             <label for="condition_general">{{ __('invoice.form.condition_general') }}</label>
                             <textarea name="condition_general" id="condition_general"
-                                      class="form-control @error('condition_general') is-invalid @enderror"
+                                class="form-control @error('condition_general') is-invalid @enderror"
                                 {{ $readOnly }}>{{ $invoice->condition_general }}</textarea>
                             @error('condition_general')
-                            <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
@@ -132,10 +121,10 @@
             </div>
             <div class="d-flex flex-wrap gap-2 justify-content-end mb-4">
                 <div class="">
-                    <button type="submit" class="btn btn-primary waves-effect waves-light" {{$disabled}}>
+                    <button type="submit" class="btn btn-primary waves-effect waves-light" {{ $disabled }}>
                         {{ __('buttons.store') }}
                     </button>
-                    <button type="submit" class="btn btn-secondary waves-effect waves-light" {{$disabled}}>
+                    <button type="submit" class="btn btn-secondary waves-effect waves-light" {{ $disabled }}>
                         {{ __('buttons.store_draft') }}
                     </button>
                 </div>

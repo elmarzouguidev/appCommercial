@@ -6,7 +6,7 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="{{route('commercial:invoices.index')}}">Factuers</a></li>
-                    <li class="breadcrumb-item active">{{$invoice->optionalcode}}</li>
+                    <li class="breadcrumb-item active">{{$invoice->code}}</li>
                 </ol>
             </div>
 

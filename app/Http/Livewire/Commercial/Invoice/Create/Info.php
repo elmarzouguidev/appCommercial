@@ -3,17 +3,14 @@
 namespace App\Http\Livewire\Commercial\Invoice\Create;
 
 use App\Models\Client;
-use App\Models\Finance\Company;
-use App\Models\Ticket;
+use App\Models\Finance\Invoice;
 use App\Repositories\Client\ClientInterface;
-use App\Repositories\Company\CompanyInterface;
 use Livewire\Component;
 
 class Info extends Component
 {
     protected $listeners = [
         'selectedClientItem',
-        'selectedCompanyItem',
     ];
 
     public function hydrate()
@@ -21,13 +18,9 @@ class Info extends Component
         $this->emit('select2');
     }
 
-    public $companies;
 
     public $clients;
 
-    public $ticket = null;
-
-    public $tickets;
     public $invoiceCode;
     public $invoicePrefix;
 
@@ -38,42 +31,29 @@ class Info extends Component
 
     public function mount()
     {
-        $this->companies = app(CompanyInterface::class)->getCompanies(['id', 'name']);
 
         $this->clients = app(ClientInterface::class)->getClients(['id', 'entreprise', 'contact']);
 
-        $this->tickets = [];
+        $this->getInvoiceDetail();
 
-        $this->invoiceCode = '0000';
-
-        $this->invoicePrefix = 'FACTURE-';
     }
 
-    public function selectedClientItem($item)
+    private function getInvoiceDetail()
     {
+        
+        if (Invoice::count() <= 0) {
 
-        if (is_numeric($item)) {
-            $this->tickets = Client::whereId($item)->first()->tickets;
-            //dd($this->clientTickets,'ff');
+            $number = getDocument()->invoice_start;
         } else {
-            $this->tickets = [];
+
+            $number = (Invoice::max('code') + 1);
         }
 
+        $code = str_pad($number, 5, 0, STR_PAD_LEFT);
+
+        $this->invoiceCode = $code;
+
+        $this->invoicePrefix= getDocument()->invoice_prefix ;
     }
 
-    public function selectedCompanyItem($item)
-    {
-        if (is_numeric($item)) {
-
-            if ($this->companies[$item - 1]->invoices->count() <= 0) {
-                $number = $this->companies[$item - 1]->invoice_start_number;
-            } else {
-                $number = ($this->companies[$item - 1]->invoices->max('code') + 1);
-            }
-
-            $this->invoiceCode = str_pad($number, 5, 0, STR_PAD_LEFT);
-
-            $this->invoicePrefix = $this->companies[$item - 1]->prefix_invoice;
-        }
-    }
 }

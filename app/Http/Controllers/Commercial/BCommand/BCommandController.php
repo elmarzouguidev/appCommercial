@@ -19,7 +19,7 @@ class BCommandController extends Controller
     public function index()
     {
 
-        $commandes = BCommand::with(['provider', 'company'])->get();
+        $commandes = BCommand::with(['provider'])->get();
 
         return view('theme.pages.Commercial.BC.index', compact('commandes'));
     }
@@ -64,7 +64,6 @@ class BCommandController extends Controller
         $command->price_tva = $this->calculateOnlyTva($totalPrice);
 
         $command->provider()->associate($request->provider);
-        $command->company()->associate($request->company);
 
         $command->save();
 
@@ -76,7 +75,7 @@ class BCommandController extends Controller
     public function edit(BCommand $command)
     {
 
-        $command->load('articles', 'provider', 'company');
+        $command->load('articles', 'provider');
 
         return view('theme.pages.Commercial.BC.__edit.index', compact('command'));
     }
@@ -109,8 +108,7 @@ class BCommandController extends Controller
         $command->admin_notes = $request->admin_notes;
 
         $command->provider()->associate($request->provider);
-        $command->company()->associate($request->company);
-
+  
         $command->save();
 
         $command->articles()->createMany($newArticles);

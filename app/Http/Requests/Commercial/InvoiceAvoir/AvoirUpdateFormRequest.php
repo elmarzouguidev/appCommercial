@@ -34,16 +34,12 @@ class AvoirUpdateFormRequest extends FormRequest
     {
         return [
             'client' => ['required', 'integer'],
-            'company' => ['required', 'integer'],
-            'ticket' => ['nullable', 'integer'],
 
             'invoice_number' => ['required', 'numeric'], //avoir invoice
 
             'invoice_date' => ['required', 'date'],
-            //'due_date' => ['required', 'date'],
 
             'admin_notes' => ['nullable', 'string'],
-            //'client_notes' => ['nullable', 'string'],
             'condition_general' => ['nullable', 'string'],
 
             'articles' => ['nullable', 'array'],
@@ -51,7 +47,6 @@ class AvoirUpdateFormRequest extends FormRequest
             'articles.*.description' => ['nullable', 'string'],
             'articles.*.quantity' => ['required', 'integer'],
             'articles.*.prix_unitaire' => ['required', 'numeric'],
-            //'articles.*.montant_ht' => ['nullable', 'numeric'],
         ];
     }
 }

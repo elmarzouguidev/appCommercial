@@ -94,7 +94,7 @@ class InvoiceAvoir extends Model
 
             if (self::count() <= 0) {
 
-                $number = getDocumentStart()->invoice_avoir_start;
+                $number = getDocument()->invoice_avoir_start;
             } else {
 
                 $number = ($model->max('code') + 1);
@@ -104,7 +104,7 @@ class InvoiceAvoir extends Model
 
             $model->code = $code;
 
-            $model->full_number = getDocumentPrefix()->invoice_avoir_prefix . $code;
+            $model->full_number = getDocument()->invoice_avoir_prefix . $code;
         });
     }
 }

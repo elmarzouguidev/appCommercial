@@ -15,9 +15,9 @@ class PDFBuilderController extends Controller
     public function build(Invoice $invoice)
     {
 
-        $invoice->load('articles', 'company', 'client');
+        $invoice->load('articles', 'client');
 
-        $companyLogo = "data:image/jpg;base64,".base64_encode(file_get_contents(public_path('storage/'.$invoice->company->logo)));
+        $companyLogo = "data:image/jpg;base64," . base64_encode(file_get_contents(public_path('storage/company/' . getCompany()->logo)));
 
         $pdf = \PDF::loadView('theme.invoices_template.template1.index', compact('invoice', 'companyLogo'));
 
@@ -29,9 +29,9 @@ class PDFBuilderController extends Controller
     public function buildAvoir(InvoiceAvoir $invoice)
     {
 
-        $invoice->load('articles', 'company', 'client');
+        $invoice->load('articles', 'client');
 
-        $companyLogo = "data:image/jpg;base64,".base64_encode(file_get_contents(public_path('storage/'.$invoice->company->logo)));
+        $companyLogo = "data:image/jpg;base64," . base64_encode(file_get_contents(public_path('storage/company/' . getCompany()->logo)));
 
         $pdf = \PDF::loadView('theme.invoices_template.avoirs.index', compact('invoice', 'companyLogo'));
 

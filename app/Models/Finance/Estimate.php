@@ -31,8 +31,6 @@ class Estimate extends Model
         'due_date',
         'invoice_id',
         'client_id',
-        'ticket_id',
-        'company_id',
         'is_send',
         'active'
     ];
@@ -198,7 +196,7 @@ class Estimate extends Model
 
             if (self::count() <= 0) {
 
-                $number = getDocumentStart()->estimate_start;
+                $number = getDocument()->estimate_start;
             } else {
 
                 $number = ($model->max('code') + 1);
@@ -208,7 +206,7 @@ class Estimate extends Model
 
             $model->code = $code;
 
-            $model->full_number = getDocumentPrefix()->estimate_prefix . $code;
+            $model->full_number = getDocument()->estimate_prefix . $code;
         });
     }
 }

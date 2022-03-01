@@ -47,9 +47,7 @@
                                 <a href="{{ $document->url }}" class="text-body fw-bold">
                                     {{ $document->full_number }}
                                 </a>
-                                <p style="color:#556ee6">
-                                    <i class="bx bx-buildings"></i> {{ optional($document->company)->name }}
-                                </p>
+    
                             </td>
                             <td> {{ optional($document->provider)->entreprise }}</td>
                             <td>
@@ -82,24 +80,8 @@
                                     <a href="{{ $document->edit_url }}" class="text-success">
                                         <i class="mdi mdi-pencil font-size-18"></i>
                                     </a>
-                                    {{--<a href="#" class="text-danger" onclick="
-                                        var result = confirm('Are you sure you want to delete this invoice ?');
-
-                                        if(result){
-                                        event.preventDefault();
-                                        document.getElementById('delete-command-{{ $document->uuid }}').submit();
-                                        }">
-                                        <i class="mdi mdi-delete font-size-18"></i>
-                                    </a>--}}
-
                                 </div>
                             </td>
-                            {{--<form id="delete-command-{{ $document->uuid }}" method="post"
-                                  action="{{ route('commercial:bcommandes.delete') }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="commandId" value="{{ $document->uuid }}">
-                            </form>--}}
                         </tr>
 
                     @endforeach
@@ -108,5 +90,5 @@
                 </table>
             </div>
         </div>
-    </div> <!-- end col -->
-</div> <!-- end row -->
+    </div>
+</div>

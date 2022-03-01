@@ -230,18 +230,18 @@
 
 <div style="position: fixed; bottom: 0; width: 100%;">
     <div style="text-align: center; color:#333; font-size: 14px">
-        <p>{{ optional($estimate->company)->name }}</p>
+        <p>{{ optional(getCompany())->name }}</p>
         <p>
-            {{ optional($estimate->company)->addresse }}
-            Tel : {{ optional($estimate->company)->telephone }}
-            E-mail : {{ optional($estimate->company)->email }}
+            {{ optional(getCompany())->addresse }}
+            Tel : {{ optional(getCompany())->telephone }}
+            E-mail : {{ optional(getCompany())->email }}
         </p>
         <p>
-            -R.C:{{ optional($estimate->company)->rc }}
-            -PATENTE:{{ optional($estimate->company)->patente }}
-            -I.F:{{ optional($estimate->company)->if }}
-            -CNSS:{{ optional($estimate->company)->cnss }}
-            -ICE:{{ optional($estimate->company)->ice }}
+            -R.C:{{ optional(getCompany())->rc }}
+            -PATENTE:{{ optional(getCompany())->patente }}
+            -I.F:{{ optional(getCompany())->if }}
+            -CNSS:{{ optional(getCompany())->cnss }}
+            -ICE:{{ optional(getCompany())->ice }}
         </p>
     </div>
     <div class="bott" style=" width: 100%;">

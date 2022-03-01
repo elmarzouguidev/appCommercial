@@ -50,17 +50,11 @@
                             </td> --}}
                             <td>
                                 <a href="{{ $invoice->url }}" class="text-body fw-bold">
-                                    <i class="bx bx-hash"></i> {{ $invoice->full_number }}
+                                    <i class="bx bx-hash"></i> {{ $invoice->code }}
                                 </a>
-                                <p style="color:#556ee6">
-                                    <i class="bx bx-buildings"></i> {{ optional($invoice->company)->name }}
-                                </p>
                             </td>
                             <td>
                                 {{ $invoice->invoice_number }}
-                                <p style="color:#556ee6">
-                                    <i class="bx bx-buildings"></i> {{ optional($invoice->client)->entreprise }}
-                                </p>
                             </td>
                             <td>
                                 {{ $invoice->invoice_date->format('d-m-Y') }}
@@ -75,23 +69,8 @@
                                 {{ $invoice->formated_total_tva }} DH
                             </td>
                             <td>
-                                @php
-                                    $status = $invoice->status;
-                                    $textt = '';
-                                    $color = '';
-                                    if ($status === 'paid') {
-                                        $textt = 'Régler';
-                                        $color = 'info';
-                                    } elseif ($status === 'non-paid') {
-                                        $textt = 'A régler';
-                                        $color = 'warning';
-                                    } else {
-                                        $textt = 'IMPAYÉE';
-                                        $color = 'warning';
-                                    }
-                                @endphp
-                                <i class="mdi mdi-circle text-{{ $color }} font-size-10"></i>
-                                {{ $textt }}
+                                <i class="mdi mdi-circle text-info font-size-10"></i>
+                                Régler
                             </td>
                             <td>
                                 <div class="d-flex gap-3">
@@ -104,23 +83,8 @@
                                     <a href="{{ $invoice->edit_url }}" class="text-success">
                                         <i class="mdi mdi-pencil font-size-18"></i>
                                     </a>
-                                    {{--<a href="#" class="text-danger" onclick="
-                                        var result = confirm('Are you sure you want to delete this invoice ?');
-
-                                        if(result){
-                                        event.preventDefault();
-                                        document.getElementById('delete-invoice-avr-{{ $invoice->uuid }}').submit();
-                                        }">
-                                        <i class="mdi mdi-delete font-size-18"></i>
-                                    </a>--}}
                                 </div>
                             </td>
-                            {{--<form id="delete-invoice-avr-{{ $invoice->uuid }}" method="post"
-                                  action="{{ route('commercial:invoices.delete.avoir') }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="invoiceId" value="{{ $invoice->uuid }}">
-                            </form>--}}
                         </tr>
 
                     @endforeach

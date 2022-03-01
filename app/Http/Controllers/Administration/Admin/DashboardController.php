@@ -29,14 +29,14 @@ class DashboardController extends Controller
                 ->allowedFilters([
                     AllowedFilter::scope('GetPeriod', 'filters_periods'),
                     AllowedFilter::scope('DateBetween', 'filters_date'),
-                    AllowedFilter::scope('GetCompany', 'filters_companies'),
+             
                 ]);
 
             $estimates = QueryBuilder::for(Estimate::dashboard())
                 ->allowedFilters([
                     AllowedFilter::scope('GetPeriod', 'filters_periods'),
                     AllowedFilter::scope('DateBetween', 'filters_date'),
-                    AllowedFilter::scope('GetCompany', 'filters_companies'),
+                 
                 ]);
 
             $allInvoices = $invoices->get();
@@ -101,8 +101,6 @@ class DashboardController extends Controller
             ];
         }
 
-        $companies = Company::select(['id', 'uuid', 'name'])->get();
-
         return view(
             'theme.pages.Home.index',
             compact(
@@ -113,7 +111,6 @@ class DashboardController extends Controller
                 'invoicesNotPaid',
                 'invoicesRetard',
                 'allInvoices',
-                'companies',
                 'allEstimates',
                 'estimatesNotInvoiced',
                 'estimatesExpired'

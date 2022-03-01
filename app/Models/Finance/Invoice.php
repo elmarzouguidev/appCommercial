@@ -135,15 +135,6 @@ class Invoice extends Model
         return $query->whereStatus($status);
     }
 
-    public function scopeFiltersColor(Builder $query, $color)
-    {
-        $colorId = Company::whereSlug($color)->firstOrFail()->id;
-
-        $query->whereHas('colors', function ($q) use ($colorId) {
-            $q->where('color_id', $colorId);
-        });
-    }
-
     public function scopeFiltersPeriods(Builder $query, $period): Builder
     {
         //dd($period);
@@ -211,7 +202,7 @@ class Invoice extends Model
 
             if (self::count() <= 0) {
 
-                $number = getDocumentStart()->invoice_start;
+                $number = getDocument()->invoice_start;
             } else {
 
                 $number = ($model->max('code') + 1);
@@ -221,7 +212,7 @@ class Invoice extends Model
 
             $model->code = $code;
 
-            $model->full_number = getDocumentPrefix()->invoice_prefix . $code;
+            $model->full_number = getDocument()->invoice_prefix . $code;
         });
     }
 }

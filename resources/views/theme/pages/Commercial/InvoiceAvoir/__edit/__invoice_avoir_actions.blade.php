@@ -4,7 +4,6 @@
         <p class="card-title-desc">Actions disponible :</p>
 
         <div class="row">
-
             <div class="col-lg-12">
                 <div class="button-items">
                     <a target="_blank" href="{{ route('commercial:invoices.pdf.build.avoir', $invoice->uuid) }}"

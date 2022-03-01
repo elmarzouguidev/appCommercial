@@ -43,19 +43,6 @@
                             <a class="dropdown-item" href="#">Personnaliser</a>
                         </div>
                     </div>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Société</button>
-                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="mdi mdi-chevron-down"></i>
-                        </button>
-                        <div class="dropdown-menu dropup ">
-                            @foreach ($companies as $company)
-                                <a class="dropdown-item {{ in_array($company->id, explode(',', request()->input('appFilter.GetCompany'))) ? 'text-danger' : '' }}"
-                                    href="{{ request()->fullUrlWithoutQuery(['appFilter.GetCompany']) }}?&appFilter[GetCompany]={{ $company->id }}">{{ $company->name }}</a>
-                            @endforeach
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

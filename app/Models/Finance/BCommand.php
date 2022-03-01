@@ -61,7 +61,7 @@ class BCommand extends Model
 
             if (self::count() <= 0) {
 
-                $number = getDocumentStart()->bc_start;
+                $number = getDocument()->bc_start;
             } else {
 
                 $number = ($model->max('code') + 1);
@@ -71,7 +71,7 @@ class BCommand extends Model
 
             $model->code = $code;
 
-            $model->full_number = getDocumentPrefix()->bc_prefix . $code;
+            $model->full_number = getDocument()->bc_prefix . $code;
         });
     }
 }

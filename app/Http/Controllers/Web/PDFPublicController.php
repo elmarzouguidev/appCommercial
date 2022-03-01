@@ -16,9 +16,9 @@ class PDFPublicController extends Controller
     public function showInvoice(Invoice $invoice)
     {
 
-        $invoice->load('articles', 'company:id,name', 'client:id,entreprise');
+        $invoice->load('articles', 'client:id,entreprise');
 
-        $companyLogo = "data:image/jpg;base64,".base64_encode(file_get_contents(public_path('storage/'.$invoice->company->logo)));
+        $companyLogo = "data:image/jpg;base64," . base64_encode(file_get_contents(public_path('storage/company/' . getCompany()->logo)));
 
         $pdf = \PDF::loadView('theme.invoices_template.template1.index', compact('invoice', 'companyLogo'));
 
@@ -30,9 +30,9 @@ class PDFPublicController extends Controller
     public function showEstimate(Estimate $estimate)
     {
 
-        $estimate->load('articles', 'company', 'client');
+        $estimate->load('articles','client');
 
-        $companyLogo = "data:image/jpg;base64,".base64_encode(file_get_contents(public_path('storage/'.$estimate->company->logo)));
+        $companyLogo = "data:image/jpg;base64," . base64_encode(file_get_contents(public_path('storage/company/' . getCompany()->logo)));
 
         $pdf = \PDF::loadView('theme.estimates_template.template1.index', compact('estimate', 'companyLogo'));
 
@@ -43,9 +43,9 @@ class PDFPublicController extends Controller
 
     public function showBCommand(BCommand $command)
     {
-        $command->load('articles', 'company', 'provider');
+        $command->load('articles','provider');
 
-        $companyLogo = "data:image/jpg;base64,".base64_encode(file_get_contents(public_path('storage/'.$command->company->logo)));
+        $companyLogo = "data:image/jpg;base64," . base64_encode(file_get_contents(public_path('storage/company/' . getCompany()->logo)));
 
         $pdf = \PDF::loadView('theme.bons_template.template1.index', compact('command', 'companyLogo'));
 
