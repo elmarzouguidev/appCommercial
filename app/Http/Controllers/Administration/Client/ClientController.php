@@ -9,7 +9,6 @@ use App\Http\Requests\Application\Client\EmailsFormRequest;
 use App\Models\Client;
 use App\Models\Utilities\Email;
 use App\Models\Utilities\Telephone;
-use App\Repositories\Category\CategoryInterface;
 use App\Repositories\Client\ClientInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -19,15 +18,15 @@ class ClientController extends Controller
 
     public function index()
     {
-        $clients = app(ClientInterface::class)->__instance()->get();
+        $clients = app(ClientInterface::class)->__instance()->withCount('tickets')->get();
 
         return view('theme.pages.Client.__datatable.index', compact('clients'));
     }
 
     public function create()
     {
-        $categories = app(CategoryInterface::class)->getCategories(['id', 'name']);
-        return view('theme.pages.Client.__create.index', compact('categories'));
+
+        return view('theme.pages.Client.__create.index');
     }
 
     public function store(ClientFormRequest $request)
@@ -109,7 +108,7 @@ class ClientController extends Controller
     public function show(string $slug)
     {
 
-        $client = app(ClientInterface::class)->getClientByUuid($slug)->firstOrFail();
+        $client = app(ClientInterface::class)->getClientByUuid($slug)->withCount('tickets')->firstOrFail();
 
         return view('theme.pages.Client.__profile.index', compact('client'));
     }

@@ -113,27 +113,6 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-
-                                <label class="control-label">Category</label>
-
-                                <select name="category" class="form-control @error('category') is-invalid @enderror">
-
-                                    <option value="">Select</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                    @endforeach
-
-                                </select>
-
-                                @error('category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="description">Description de la société</label>
                                 <textarea class="form-control @error('description') is-invalid @enderror"
                                     id="description" rows="5" name="description">{{ old('description') }}</textarea>

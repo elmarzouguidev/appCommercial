@@ -1,30 +1,16 @@
 <?php
 
 use App\Http\Controllers\Administration\Admin\AdminController;
-use App\Http\Controllers\Administration\Admin\CalendarController;
-use App\Http\Controllers\Administration\Admin\ContactController;
 use App\Http\Controllers\Administration\Admin\DashboardController;
-
-use App\Http\Controllers\Administration\PDF\GenerateReportController;
-use App\Http\Controllers\Administration\Ticket\TicketController;
-use App\Http\Controllers\Administration\Category\CategoryController;
-use App\Http\Controllers\Administration\Chat\ChatController;
-use App\Http\Controllers\Administration\Email\EmailController;
 use App\Http\Controllers\Administration\Client\ClientController;
-use App\Http\Controllers\Administration\Diagnostique\DiagnostiqueController;
+
 use App\Http\Controllers\Administration\Import\CSVImportController;
 use App\Http\Controllers\Administration\PermissionRole\PermissionRoleController;
 use App\Http\Controllers\Administration\Profil\ProfilController;
-use App\Http\Controllers\Administration\Reparation\ReparationController;
-use App\Http\Controllers\Administration\Warranty\WarrantyController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', [DashboardController::class, 'index'])->name('home');
-
-
-
-Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar');
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts');
 
 Route::group(['prefix' => 'auth', 'middleware' => ['role:SuperAdmin']], function () {
 
@@ -42,35 +28,6 @@ Route::group(['prefix' => 'auth', 'middleware' => ['role:SuperAdmin']], function
         Route::post('/edit/permissions/{user}', [AdminController::class, 'syncPermission'])->name('admins.syncPermissions');
     });
 
-});
-
-
-
-Route::group(['prefix' => 'categories'], function () {
-
-    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
-    Route::delete('/categories', [CategoryController::class, 'delete'])->name('categories.delete');
-
-    Route::group(['prefix' => 'overview'], function () {
-    });
-});
-
-Route::group(['prefix' => 'discussion'], function () {
-
-    Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
-
-    Route::group(['prefix' => 'overview'], function () {
-    });
-});
-
-Route::group(['prefix' => 'emails'], function () {
-
-    Route::get('/inbox', [EmailController::class, 'index'])->name('emails.inbox');
-
-    Route::group(['prefix' => 'overview'], function () {
-        Route::get('/email', [EmailController::class, 'show'])->name('emails.show');
-    });
 });
 
 Route::group(['prefix' => 'clients'], function () {

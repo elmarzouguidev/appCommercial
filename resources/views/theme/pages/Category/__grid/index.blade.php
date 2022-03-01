@@ -1,1 +1,0 @@
-@include('theme.pages.Category.__grid.categories_grid')
