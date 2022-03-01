@@ -11,7 +11,7 @@ class CompanySettingsController extends Controller
 {
 
 
-    public function show(CompanySettings $settings)
+    public function index(CompanySettings $settings)
     {
 
         return view('theme.pages.Setting.index', [

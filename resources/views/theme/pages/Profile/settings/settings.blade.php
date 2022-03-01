@@ -13,9 +13,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#profile" role="tab">
+                        <a class="nav-link" data-bs-toggle="tab" href="#company" role="tab">
                             <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
-                            <span class="d-none d-sm-block">Profile</span>
+                            <span class="d-none d-sm-block">Société</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -38,8 +38,8 @@
                         @include('theme.pages.Profile.settings._user_info_form')
                     </div>
 
-                    <div class="tab-pane" id="profile" role="tabpanel">
-                        ffffffffff
+                    <div class="tab-pane" id="company" role="tabpanel">
+                        @include('theme.pages.Profile.settings._company_info')
                     </div>
                 </div>
             </div>

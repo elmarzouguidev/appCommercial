@@ -109,6 +109,13 @@
                         </li>
                     </ul>
                 </li>
+                
+                <li>
+                    <a href="{{ route('admin:admins') }}" class="waves-effect">
+                        <span key="t-settings">Settings</span>
+                    </a>
+        
+                </li>
             </ul>
         </div>
     </div>

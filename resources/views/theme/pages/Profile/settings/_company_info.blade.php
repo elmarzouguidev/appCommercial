@@ -5,14 +5,14 @@
                 {{ session('success') }}
             </div>
         @endif
-        <form action="{{ route('admin:profile.settings.update') }}" method="post">
+        <form action="{{ route('admin:settings.company.update') }}" method="post">
             @csrf
             <div class="mb-3 row">
                 <label for="nom" class="col-md-2 col-form-label">Nom</label>
                 <div class="col-md-10">
-                    <input class="form-control @error('nom') is-invalid @enderror" type="text" name="nom"
-                        value="{{ $user->nom }}" id="nom">
-                    @error('nom')
+                    <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
+                        value="{{ $user->name }}" id="name">
+                    @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

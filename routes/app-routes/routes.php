@@ -7,7 +7,7 @@ use App\Http\Controllers\Administration\Client\ClientController;
 use App\Http\Controllers\Administration\Import\CSVImportController;
 use App\Http\Controllers\Administration\PermissionRole\PermissionRoleController;
 use App\Http\Controllers\Administration\Profil\ProfilController;
-
+use App\Http\Controllers\Administration\Setting\CompanySettingsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', [DashboardController::class, 'index'])->name('home');
@@ -27,7 +27,6 @@ Route::group(['prefix' => 'auth', 'middleware' => ['role:SuperAdmin']], function
         //Route::get('/edit/permissions/{admin}', [AdminController::class, 'edit'])->name('admins.edit');
         Route::post('/edit/permissions/{user}', [AdminController::class, 'syncPermission'])->name('admins.syncPermissions');
     });
-
 });
 
 Route::group(['prefix' => 'clients'], function () {
@@ -72,4 +71,9 @@ Route::group(['prefix' => 'profile'], function () {
 
     Route::get('/settings', [ProfilController::class, 'settings'])->name('profile.settings');
     Route::post('/settings', [ProfilController::class, 'update'])->name('profile.settings.update');
+});
+
+Route::group(['prefix' => 'app-settings'], function () {
+
+    Route::get('/', [CompanySettingsController::class, 'index'])->name('settings.company');
 });

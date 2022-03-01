@@ -12,14 +12,14 @@ class ProfilController extends Controller
 
     public function index()
     {
-        $user = auth(\ticketApp::activeGuard())->user();
+        $user = auth()->user();
 
         return view('theme.pages.Profile.index', compact('user'));
     }
 
     public function settings()
     {
-        $user = auth(\ticketApp::activeGuard())->user();
+        $user = auth()->user();
 
         return view('theme.pages.Profile.settings.index', compact('user'));
     }
@@ -27,7 +27,7 @@ class ProfilController extends Controller
     public function update(ProfileUpdateFormRequest $request)
     {
         // dd($request->all());
-        $user = auth(\ticketApp::activeGuard())->user();
+        $user = auth()->user();
 
         if ($user) {
             $user->nom = $request->nom;
