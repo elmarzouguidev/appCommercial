@@ -30,10 +30,9 @@ class CreateBCommandsTable extends Migration
             $table->date('date_due')->nullable();
 
             $table->foreignId('provider_id')->index()->nullable()->constrained();
-            $table->foreignId('company_id')->index()->constrained();
-
+ 
             $table->mediumText('admin_notes')->nullable();
-            $table->mediumText('client_notes')->nullable();
+
             $table->mediumText('condition_general')->nullable();
 
             $table->boolean('active')->default(true);
