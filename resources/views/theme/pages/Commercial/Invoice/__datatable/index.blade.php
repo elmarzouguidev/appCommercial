@@ -23,6 +23,8 @@
     <script src="{{ asset('assets/libs/datatables.js') }}"></script>
     <script src="{{ asset('js/pages/datatables.init.js') }}"></script>
 
+    <script src="{{ asset('assets/libs/select2/js/select2.min.js') }}"></script>
+    
     <script>
         function openFilters() {
             var element = document.getElementById("invoices-list");
