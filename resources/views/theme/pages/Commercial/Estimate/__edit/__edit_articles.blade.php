@@ -2,7 +2,7 @@
 
     @foreach ($estimate->articles as $article)
         <div data-repeater-item class="row">
-            <div class="mb-3 col-lg-2">
+            <div class="mb-3 col-lg-3">
                 <label for="designation">Désignation</label>
                 <textarea name="designation" id="designation"
                     class="form-control @error('articles.*.designation') is-invalid @enderror">{{ $article->designation }}
@@ -14,7 +14,7 @@
                 @enderror
             </div>
 
-            <div class="mb-3 col-lg-2">
+            <div class="mb-3 col-lg-3">
                 <label for="description">Description</label>
                 <textarea name="description" id="description"
                     class="form-control @error('articles.*.description') is-invalid @enderror">{{ $article->description }}
@@ -47,11 +47,6 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-            </div>
-
-            <div class="mb-3 col-lg-2">
-                <label for="taxe">Taxe</label>
-                <input type="text" id="taxe" value="20%" class="form-control" readonly />
             </div>
 
             <div class="mb-3 col-lg-2">

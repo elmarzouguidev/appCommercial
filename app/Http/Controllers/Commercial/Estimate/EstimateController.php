@@ -11,7 +11,6 @@ use App\Http\Requests\Commercial\Estimate\SendEmailFormRequest;
 use App\Mail\Commercial\Estimate\SendEstimateMail;
 use App\Models\Finance\Article;
 use App\Models\Finance\Estimate;
-use App\Models\Ticket;
 use App\Repositories\Company\CompanyInterface;
 use App\Services\Commercial\Taxes\TVACalulator;
 use App\Services\Mail\CheckConnection;
@@ -25,7 +24,7 @@ class EstimateController extends Controller
 
     public function index()
     {
-        $estimates = Estimate::with(['company:id,name,logo', 'client:id,entreprise,email','client.emails'])
+        $estimates = Estimate::with(['client:id,entreprise,email','client.emails'])
             ->withCount('invoice')
             //->paginate(20);
             ->get();
@@ -41,25 +40,7 @@ class EstimateController extends Controller
 
         //$companies = app(CompanyInterface::class)->getCompanies(['id', 'name']);
 
-        $tickets = Ticket::all();
-
-        return view('theme.pages.Commercial.Estimate.__create.index', compact('tickets'));
-    }
-
-    public function createFromTicket(Request $request, $ticket)
-    {
-        //dd('yes from ticket');
-        validator($request->route()->parameters(), [
-
-            'ticket' => ['required', 'uuid']
-
-        ])->validate();
-
-        $ticket = Ticket::whereUuid($ticket)->with('client')->firstOrFail();
-
-        $companies = app(CompanyInterface::class)->getCompanies(['id', 'name']);
-
-        return view('theme.pages.Commercial.Estimate.__create_from_ticket.index', compact('ticket', 'companies'));
+        return view('theme.pages.Commercial.Estimate.__create.index');
     }
 
     public function store(EstimateFormRequest $request)
@@ -82,7 +63,6 @@ class EstimateController extends Controller
         $estimate->due_date = $request->date('due_date');
 
         $estimate->admin_notes = $request->admin_notes;
-        //$estimate->client_notes = $request->client_notes;
         $estimate->condition_general = $request->condition_general;
 
         $estimate->price_ht = $totalPrice;
@@ -90,31 +70,10 @@ class EstimateController extends Controller
         $estimate->price_tva = $this->calculateOnlyTva($totalPrice);
 
         $estimate->client_id = $request->client;
-        $estimate->ticket_id = $request->ticket;
-        $estimate->company_id = $request->company;
 
         $estimate->save();
 
         $estimate->articles()->createMany($estimateArticles);
-
-        if ($request->ticket && $request->ticket > 0) {
-
-            $estimate->ticket()->update(['status' => Status::EN_ATTENTE_DE_BON_DE_COMMAND]);
-
-            $estimate->ticket->statuses()->attach(
-                Status::EN_ATTENTE_DE_BON_DE_COMMAND,
-                [
-                    'user_id' => auth()->id(),
-                    'start_at' => now(),
-                    'description' => __('status.history.' . Status::EN_ATTENTE_DE_BON_DE_COMMAND, ['user' => auth()->user()->full_name])
-                ]);
-        }
-
-        if (isset($request->tickets) && is_array($request->tickets) && count($request->tickets)) {
-            //dd($request->tickets);
-            $estimate->tickets()->attach($request->tickets);
-            $estimate->tickets()->update(['status' => Status::EN_ATTENTE_DE_BON_DE_COMMAND]);
-        }
 
         return redirect($estimate->edit_url);
     }
@@ -129,7 +88,7 @@ class EstimateController extends Controller
     public function edit(Estimate $estimate)
     {
 
-        $estimate->load('articles', 'tickets:id,code,uuid')->loadCount('invoice','tickets');
+        $estimate->load('articles')->loadCount('invoice');
 
         return view('theme.pages.Commercial.Estimate.__edit.index', compact('estimate'));
     }
@@ -160,16 +119,11 @@ class EstimateController extends Controller
         $estimate->due_date = $request->date('due_date');
 
         $estimate->admin_notes = $request->admin_notes;
-        //$estimate->client_notes = $request->client_notes;
         $estimate->condition_general = $request->condition_general;
 
         $estimate->save();
         $estimate->articles()->createMany($newArticles);
 
-        if (isset($request->tickets) && is_array($request->tickets) && count($request->tickets)) {
-            //dd($request->tickets);
-            $estimate->tickets()->sync($request->tickets);
-        }
         return redirect($estimate->edit_url)->with('success', "Le devis a été modifier avec success");
     }
 
@@ -235,7 +189,7 @@ class EstimateController extends Controller
     public function createInvoice(Estimate $estimate)
     {
         //dd('OoOKK');
-        $estimate->load('articles', 'tickets:id,code', 'client:id,entreprise', 'company:id,name,prefix_invoice,invoice_start_number');
+        $estimate->load('articles', 'client:id,entreprise');
 
         return view('theme.pages.Commercial.Invoice.__create_from_estimate.index', compact('estimate'));
     }

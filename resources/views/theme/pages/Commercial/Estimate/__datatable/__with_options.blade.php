@@ -48,9 +48,6 @@
                                 <a href="{{ $estimate->url }}" class="text-body fw-bold">
                                     {{ $estimate->code }}
                                 </a>
-                                <p style="color:#556ee6">
-                                    <i class="bx bx-buildings"></i> {{ optional($estimate->company)->name }}
-                                </p>
                             </td>
                             <td> {{ optional($estimate->client)->entreprise }}</td>
                             <td>
@@ -107,23 +104,8 @@
                                     <a href="{{ $estimate->edit_url }}" class="text-success">
                                         <i class="mdi mdi-pencil font-size-18"></i>
                                     </a>
-                                    {{--<a href="#" class="text-danger" onclick="
-                                        var result = confirm('Are you sure you want to delete this invoice ?');
-
-                                        if(result){
-                                        event.preventDefault();
-                                        document.getElementById('delete-estimate-{{ $estimate->uuid }}').submit();
-                                        }">
-                                        <i class="mdi mdi-delete font-size-18"></i>
-                                    </a>--}}
                                 </div>
                             </td>
-                            {{--<form id="delete-estimate-{{ $estimate->uuid }}" method="post"
-                                  action="{{ route('commercial:estimates.delete') }}">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="estimateId" value="{{ $estimate->uuid }}">
-                            </form>--}}
                         </tr>
 
                     @endforeach

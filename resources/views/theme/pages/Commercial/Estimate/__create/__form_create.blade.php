@@ -10,7 +10,6 @@
                     <div class="row">
                         <div class="col-lg-6">
 
-                            {{-- @include('theme.pages.Commercial.Estimate.__create.__info') --}}
                             @livewire('commercial.estimate.create.info')
 
                             <div class="col-lg-12">
@@ -51,8 +50,6 @@
 
                                 </div>
                             </div>
-                            {{--@include('theme.pages.Commercial.Estimate.__create.__tickets')--}}
-                            @livewire('commercial.estimate.create.tickets')
                         </div>
 
                         <div class="col-lg-6">

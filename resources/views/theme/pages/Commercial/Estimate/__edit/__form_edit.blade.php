@@ -12,23 +12,7 @@
 
                             @include('theme.pages.Commercial.Estimate.__edit.__info')
 
-                            <div class="docs-options">
-                                <label class="form-label">Numéro de Devis</label>
-                                <div class="input-group mb-4">
 
-                                    <span class="input-group-text" id="estimate_prefix">
-                                        {{ \ticketApp::estimatePrefix() }}
-                                    </span>
-                                    <input type="text" class="form-control @error('code') is-invalid @enderror"
-                                           name="code" value="{{ $estimate->code }}"
-                                           aria-describedby="estimate_prefix" readonly>
-                                    @error('code')
-                                    <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-lg-6 mb-4">
@@ -67,26 +51,6 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($estimate->tickets_count > 0)
-                                @include('theme.pages.Commercial.Estimate.__edit.__edit_tickets')
-                            @else
-                                <div class="col-lg-12">
-                                    <div class="mb-4">
-                                        <label class="form-label">Ticket </label>
-                                        <select name="ticket"
-                                                class="form-control  @error('ticket') is-invalid @enderror">
-                                            <option
-                                                value="{{ optional($estimate->ticket)->id }}">{{ optional($estimate->ticket)->code }}</option>
-                                        </select>
-                                        @error('ticket')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-
-                                    </div>
-                                </div>
-                            @endif
 
                         </div>
 
@@ -120,7 +84,6 @@
                     <div class="row" id="articles_list">
                         <div class="col-lg-12 mb-4">
                             @include('theme.pages.Commercial.Estimate.__edit.__edit_articles')
-                            {{--@include('theme.pages.Commercial.Estimate.__edit.__add_article')--}}
                         </div>
                         <div class="col-lg-12">
                             <div class="justify-content-end">

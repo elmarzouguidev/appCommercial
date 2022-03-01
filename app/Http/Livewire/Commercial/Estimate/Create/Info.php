@@ -3,25 +3,19 @@
 namespace App\Http\Livewire\Commercial\Estimate\Create;
 
 use App\Models\Client;
-use App\Models\Finance\Company;
-use App\Models\Ticket;
+use App\Models\Finance\Estimate;
 use App\Repositories\Client\ClientInterface;
-use App\Repositories\Company\CompanyInterface;
 use Livewire\Component;
 
 class Info extends Component
 {
     protected $listeners = [
-        //'selectedClientItem',
-        'selectedCompanyItem',
     ];
 
-    public $companies;
+
     public $clients;
-    public $tickets;
     public $estimateCode;
     public $estimatePrefix;
-
 
     public function hydrate()
     {
@@ -35,40 +29,27 @@ class Info extends Component
 
     public function mount()
     {
-        $this->companies = app(CompanyInterface::class)->getCompanies(['id', 'name']);
-
+       
         $this->clients = app(ClientInterface::class)->getClients(['id', 'entreprise', 'contact']);
 
-        $this->tickets = [];
-
-        $this->estimateCode = '00000';
-
-        $this->estimatePrefix = 'DEVIS-';
+        $this->estimateDetail();
     }
 
-    public function selectedClientItem($item)
+    private function estimateDetail()
     {
-        if (is_numeric($item)) {
-            $this->tickets = Client::whereId($item)->first()->tickets;
-            //dd($this->clientTickets,'ff');
+        
+        if (Estimate::count() <= 0) {
+
+            $number = getDocument()->estimate_start;
         } else {
-            $this->tickets = [];
+
+            $number = (Estimate::max('code') + 1);
         }
-    }
 
-    public function selectedCompanyItem($item)
-    {
-        if (is_numeric($item)) {
+        $code = str_pad($number, 5, 0, STR_PAD_LEFT);
 
-            if ($this->companies[$item - 1]->estimates->count() <= 0) {
-                $number = $this->companies[$item - 1]->estimate_start_number;
-            } else {
-                $number = ($this->companies[$item - 1]->estimates->max('code') + 1);
-            }
+        $this->estimateCode = $code;
 
-            $this->estimateCode = str_pad($number, 5, 0, STR_PAD_LEFT);
-
-            $this->estimatePrefix = $this->companies[$item - 1]->prefix_estimate;
-        }
+        $this->estimatePrefix= getDocument()->estimate_prefix ;
     }
 }
