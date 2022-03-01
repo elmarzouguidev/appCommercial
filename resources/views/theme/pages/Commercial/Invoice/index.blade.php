@@ -1,0 +1,1 @@
+@include('theme.pages.Commercial.Invoice.__datatable.index')

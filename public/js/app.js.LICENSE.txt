@@ -1,0 +1,15 @@
+/*!
+  * Bootstrap v5.0.1 (https://getbootstrap.com/)
+  * Copyright 2011-2021 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  */
+
+/*!
+* metismenu https://github.com/onokumus/metismenu#readme
+* A jQuery menu plugin
+* @version 3.0.6
+* @author Osman Nuri Okumus <onokumus@gmail.com> (https://github.com/onokumus)
+* @license: MIT 
+*/
+
+/*! jQuery v3.5.1 | (c) JS Foundation and other contributors | jquery.org/license */

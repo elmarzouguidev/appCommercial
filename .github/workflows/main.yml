@@ -1,0 +1,42 @@
+on: push
+name: Run test PHP 7.4
+jobs:
+  phpunit:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:7.4
+
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
+    - name: Check if  composer dependencies are Cached
+      uses: actions/cache@v2
+      with:
+         path: vendor
+         key: composer-${{ hashFiles('composer.lock') }}
+
+    - name: Install composer dependencies
+      run: |
+        composer install --no-scripts
+
+    - name: Prepare Laravel Application
+      run: |
+        cp .env.ci .env
+        php artisan key:generate --ansi
+        php artisan migrate
+        php artisan db:seed
+
+    - name: Run Testsuite
+      run: vendor/bin/phpunit tests/
