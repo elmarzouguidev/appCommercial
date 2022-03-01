@@ -1,10 +1,10 @@
 <p align="center">
-    <a href="https://app.elmarzougui.net" target="_blank">
+    <a href="https://elmarzougui.net" target="_blank">
         <img src="./logo.svg" width="400" height="200">
     </a>
 </p>
 
-## ERP CASA MAINTENANCE
+## Commercial Application
 
 ### Premium Partners
 
@@ -15,4 +15,4 @@
 
 ## License
 
-ERP CASA MAINTENANCE App software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Commercial Application  software licensed under the [MIT license](https://opensource.org/licenses/MIT).
