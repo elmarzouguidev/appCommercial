@@ -26,8 +26,6 @@
                         <th>Montant HT</th>
                         <th>Montant TOTAL</th>
                         <th>Montant TVA</th>
-                        {{--<th>Date d'échéance</th>--}}
-                        <th>Détails</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -61,15 +59,6 @@
                             </td>
                             <td>
                                 {{ $document->formated_total_tva }}
-                            </td>
-                            {{--<td>
-                                {{ $document->date_due }}
-                            </td>--}}
-                            <td>
-                                <a href="{{ $document->url }}" type="button"
-                                   class="btn btn-primary btn-sm btn-rounded">
-                                    Voir les détails
-                                </a>
                             </td>
                             <td>
                                 <div class="d-flex gap-3">
