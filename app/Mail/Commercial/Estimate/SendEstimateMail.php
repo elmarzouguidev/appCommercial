@@ -34,17 +34,17 @@ class SendEstimateMail extends Mailable
      */
     public function build()
     {
-        $this->data->load('articles', 'company', 'client');
+        $this->data->load('articles', 'client');
 
-        $logo = $this->data->company->logo;
+        $logo = getCompany()->logo;
 
         $estimate = $this->data;
 
-        $companyLogo = public_path('storage/' . $logo);
+        $companyLogo = public_path('storage/company/' . $logo);
 
         $pdf = \PDF::loadView('theme.estimates_template.template1.index', compact('estimate', 'companyLogo'));
 
-        return $this->from('no-replay@' . request()->getHost(), Str::upper($this->data->company->name))
+        return $this->from('no-replay@' . request()->getHost(), Str::upper(getCompany()->name))
             ->subject('DEVIS N°: ' . $this->data->code)
             ->view('theme.Emails.Commercial.Estimate.SendEstimateMail')
             ->with('data', (object)$this->data)
