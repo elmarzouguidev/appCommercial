@@ -240,6 +240,12 @@ class InvoiceController extends Controller
                 $invoice->save();
             }
 
+            $invoice->histories()->create([
+                'user_id' => auth()->id(),
+                'user' => auth()->user()->full_name,
+                'detail' => 'a supprimer un article de puis la facture',
+                'action' => 'delete-article'
+            ]);
             return response()->json([
                 'success' => 'Record deleted successfully!'
             ]);

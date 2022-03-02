@@ -55,7 +55,7 @@ class InvoiceAvoirController extends Controller
             ->doesntHave('avoir')
             ->get();
 
-        return view('theme.pages.Commercial.InvoiceAvoir.__create_avoir.index', compact('clients','invoices'));
+        return view('theme.pages.Commercial.InvoiceAvoir.__create_avoir.index', compact('clients', 'invoices'));
     }
 
     public function store(AvoirFormRequest $request)
@@ -93,6 +93,13 @@ class InvoiceAvoirController extends Controller
 
         $invoice->articles()->createMany($invoicesArticles);
 
+        $invoice->histories()->create([
+            'user_id' => auth()->id(),
+            'user' => auth()->user()->full_name,
+            'detail' => 'a crée la facture avoir',
+            'action' => 'add'
+        ]);
+
         return redirect($invoice->edit_url)->with('success', "La Facture a été crée avec success");
     }
 
@@ -106,7 +113,7 @@ class InvoiceAvoirController extends Controller
     public function edit(InvoiceAvoir $invoice)
     {
 
-        $invoice->load('articles','histories');
+        $invoice->load('articles', 'histories');
 
         return view('theme.pages.Commercial.InvoiceAvoir.__edit.index', compact('invoice'));
     }
@@ -140,6 +147,13 @@ class InvoiceAvoirController extends Controller
         $invoice->save();
         $invoice->articles()->createMany($newArticles);
 
+        $invoice->histories()->create([
+            'user_id' => auth()->id(),
+            'user' => auth()->user()->full_name,
+            'detail' => 'a modifier la facture avoir',
+            'action' => 'update'
+        ]);
+
         return redirect($invoice->edit_url)->with('success', "La Facture a été modifier avec success");
     }
 
@@ -156,6 +170,14 @@ class InvoiceAvoirController extends Controller
                 ->where('articleable_type', 'App\Models\Finance\InvoiceAvoir')
                 ->where('articleable_id', $invoice->id)
                 ->delete();
+
+
+            $invoice->histories()->create([
+                'user_id' => auth()->id(),
+                'user' => auth()->user()->full_name,
+                'detail' => 'a supprimer la facture avoir',
+                'action' => 'delete'
+            ]);
 
             $invoice->delete();
 
@@ -205,5 +227,4 @@ class InvoiceAvoirController extends Controller
             'error' => 'problem detected !'
         ]);
     }
-
 }
