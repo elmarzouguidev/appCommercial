@@ -60,8 +60,7 @@ class ClientController extends Controller
     {
         $client->load('telephones','emails');
 
-        $categories = app(CategoryInterface::class)->getCategories(['id', 'name']);
-        return view('theme.pages.Client.__edit.index', compact('client', 'categories'));
+        return view('theme.pages.Client.__edit.index', compact('client'));
     }
 
     public function update(ClientUpdateFormRequest $request, $client)

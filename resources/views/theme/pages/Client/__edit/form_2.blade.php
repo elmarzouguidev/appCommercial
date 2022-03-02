@@ -105,39 +105,7 @@
                                     </span>
                                 @enderror
                             </div>
-                            <div class="mb-3">
-
-                                <label class="control-label">Category</label>
-
-                                <select name="category" class="form-control @error('category') is-invalid @enderror">
-
-                                    <option value="">Select</option>
-                                    @foreach ($categories as $category)
-
-                                        <option value="{{ $category->id }}"
-                                            {{ $client->category->id == $category->id ? 'selected' : '' }}>
-                                            {{ $category->name }}</option>
-                                    @endforeach
-
-                                </select>
-
-                                @error('category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-                            </div>
-                            {{-- <div class="mb-3">
-                                <label class="control-label">Features</label>
-
-                                <select class="select2 form-control select2-multiple" multiple="multiple" data-placeholder="Choose ...">
-                                    <option value="WI">Wireless</option>
-                                    <option value="BE">Battery life</option>
-                                    <option value="BA">Bass</option>
-                                </select>
-
-                            </div> --}}
+                            
                             <div class="mb-3">
                                 <label for="description">Description de la société</label>
                                 <textarea class="form-control @error('description') is-invalid @enderror"
