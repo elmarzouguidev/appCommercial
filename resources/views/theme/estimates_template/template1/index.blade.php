@@ -244,8 +244,6 @@
             -ICE:{{ optional(getCompany())->ice }}
         </p>
     </div>
-    <div class="bott" style=" width: 100%;">
-    </div>
 </div>
 
 </body>
