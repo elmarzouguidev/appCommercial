@@ -147,7 +147,7 @@
                     <tr>
                         <td class="title" style="text-align: center;">
                             <img src="{{ $companyLogo }}" alt="{{ optional(getCompany())->name }}"
-                                {{--style="width: 100%; height: 30%"--}}/>
+                                style="width: 30%; height: 30%"/>
                         </td>
 
                     </tr>
