@@ -24,7 +24,7 @@ class EstimateController extends Controller
 
     public function index()
     {
-        $estimates = Estimate::with(['client:id,entreprise,email','client.emails'])
+        $estimates = Estimate::with(['client:id,entreprise,email', 'client.emails'])
             ->withCount('invoice')
             //->paginate(20);
             ->get();
@@ -75,6 +75,13 @@ class EstimateController extends Controller
 
         $estimate->articles()->createMany($estimateArticles);
 
+        $estimate->histories()->create([
+            'user_id' => auth()->id(),
+            'user' => auth()->user()->full_name,
+            'detail' => 'A crée le devis',
+            'action' => 'add'
+        ]);
+
         return redirect($estimate->edit_url);
     }
 
@@ -88,7 +95,7 @@ class EstimateController extends Controller
     public function edit(Estimate $estimate)
     {
 
-        $estimate->load('articles')->loadCount('invoice');
+        $estimate->load('articles','histories')->loadCount('invoice');
 
         return view('theme.pages.Commercial.Estimate.__edit.index', compact('estimate'));
     }
@@ -203,11 +210,11 @@ class EstimateController extends Controller
             if (isset($emails) && is_array($emails) && count($emails)) {
 
                 foreach ($emails as $email) {
-                    Mail::to($email)->send(New SendEstimateMail($estimate));
+                    Mail::to($email)->send(new SendEstimateMail($estimate));
                 }
             }
 
-            Mail::to($estimate->client->email)->send(New SendEstimateMail($estimate));
+            Mail::to($estimate->client->email)->send(new SendEstimateMail($estimate));
 
             if (empty(Mail::failures())) {
 

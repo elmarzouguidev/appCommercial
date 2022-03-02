@@ -4,6 +4,7 @@ namespace App\Models\Finance;
 
 use App\Models\Client;
 use App\Models\Ticket;
+use App\Models\Utilities\History;
 use App\Traits\GetModelByUuid;
 use App\Traits\UuidGenerator;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -37,6 +38,11 @@ class InvoiceAvoir extends Model
     public function articles()
     {
         return $this->morphMany(Article::class, 'articleable');
+    }
+
+    public function histories()
+    {
+        return $this->morphMany(History::class, 'historyable'); 
     }
 
     public function bill()
