@@ -3,7 +3,7 @@
         <div class="mb-4">
             <label class="form-label">Client *</label>
             <input type="text" name="client" class="form-control @error('client') is-invalid @enderror"
-            value="{{ optional($bill->billable->client)->entreprise }}" readonly>
+            value="{{ optional(optional($bill->billable)->client)->entreprise }}" readonly>
             @error('client')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

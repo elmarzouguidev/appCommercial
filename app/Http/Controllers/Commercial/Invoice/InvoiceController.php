@@ -192,6 +192,7 @@ class InvoiceController extends Controller
                 ->delete();
                 
             $invoice->estimate()->update(['is_invoiced' => false]);
+            $invoice->bill()->delete();
 
             $invoice->histories()->create([
                 'user_id' => auth()->id(),

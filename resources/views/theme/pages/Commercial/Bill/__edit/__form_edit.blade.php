@@ -19,7 +19,7 @@
                                         <div class="input-group">
                                             <input type="text" name="date_invoice"
                                                 class="form-control @error('date_invoice') is-invalid @enderror"
-                                                value="{{optional($bill->billable)->invoice_date->format('Y-m-d')}}"
+                                                value="{{optional($bill->billable)->invoice_date->format('d-m-Y')}}"
                                                 readonly >
 
                                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
@@ -36,7 +36,7 @@
                                         <div class="input-group">
                                             <input type="text"
                                                 class="form-control @error('date_due') is-invalid @enderror"
-                                                name="date_due" value="{{ optional($bill->billable)->due_date->format('Y-m-d') }}"
+                                                name="date_due" value="{{ optional($bill->billable)->due_date->format('d-m-Y') }}"
                                             data-date-autoclose="true" readonly>
                                             <span class="input-group-text"><i class="mdi mdi-calendar"></i></span>
                                             @error('date_due')
