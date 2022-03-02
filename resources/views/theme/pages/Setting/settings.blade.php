@@ -19,7 +19,7 @@
                 <div class="tab-content p-3 text-muted">
 
                     <div class="tab-pane" id="company" role="tabpanel">
-                        @include('theme.pages.Setting._company_info')
+                 
                     </div>
                 </div>
             </div>
