@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="mb-2">Devis N° : <span class="text-primary">{{ $estimate->full_number }}</span></p>
-                    <p class="mb-2">Société  : <span class="text-primary">{{ optional($estimate->company)->name }}</span></p>
+                    <p class="mb-2">Société  : <span class="text-primary">{{ optional(getCompany())->name }}</span></p>
                     <p class="mb-2">Client  : <span class="text-primary">{{ optional($estimate->client)->entreprise }}</span></p>
 
                     <p class="mb-2">sélectionner les emails : </p>

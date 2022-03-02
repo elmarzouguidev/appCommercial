@@ -6,7 +6,7 @@
                     <h4 class="float-end font-size-16">DEVIS N° : {{ $estimate->code }}</h4>
                     <div class="mb-4">
                         @php
-                            $logo =  asset('storage/' . $estimate->company->logo);
+                            $logo =  asset('storage/' . getCompany()->logo);
                         @endphp
                         <img src="{{ $logo }}" alt="logo" height="50" />
                     </div>
@@ -23,11 +23,11 @@
                     </div>
                     <div class="col-sm-6 text-sm-end">
                         <address class="mt-2 mt-sm-0">
-                            <strong>{{ optional($estimate->company)->name }}</strong><br>
+                            <strong>{{ optional(getCompany())->name }}</strong><br>
 
-                            Adresse : {{ optional($estimate->company)->addresse }}
+                            Adresse : {{ optional(getCompany())->addresse }}
                             <br>
-                            ICE : {{ optional($estimate->company)->ice }}
+                            ICE : {{ optional(getCompany())->ice }}
                             <br>
                         </address>
                     </div>
