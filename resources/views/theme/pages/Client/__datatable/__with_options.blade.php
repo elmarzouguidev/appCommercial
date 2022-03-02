@@ -46,7 +46,7 @@
                                     </div>
                                 </td>--}}
                                 <td>
-                                    <a href="{{ $client->url }}" class="text-body fw-bold">
+                                    <a href="{{--$client->url--}}" class="text-body fw-bold">
                                         {{ $client->code }}
                                     </a>
                                 </td>
