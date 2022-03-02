@@ -23,6 +23,7 @@ class BillController extends Controller
 
         $invoices = Invoice::select('id', 'uuid', 'code', 'full_number', 'price_total')
             ->doesntHave('bill')
+            ->doesntHave('avoir')
             ->get();
 
         return view('theme.pages.Commercial.Bill.__datatable.index', compact('bills', 'invoices'));
@@ -86,7 +87,7 @@ class BillController extends Controller
         $invoice->bill()->create($biller);
 
         if ($newPrice === (float)$invoice->price_total) {
-            
+
             $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
         } else {
             $invoice->update(['status' => Response::INVOICE_PARTIAL, 'is_paid' => false]);
