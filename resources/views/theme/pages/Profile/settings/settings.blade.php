@@ -39,7 +39,7 @@
                     </div>
 
                     <div class="tab-pane" id="company" role="tabpanel">
-                        @include('theme.pages.Profile.settings._company_info')
+                        
                     </div>
                 </div>
             </div>
