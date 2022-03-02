@@ -6,20 +6,26 @@ use App\Constants\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Commercial\Bill\BillFormRequest;
 use App\Http\Requests\Commercial\Bill\BillInvoiceFormRequest;
+use App\Http\Requests\Commercial\Bill\BillStoreFormRequest;
 use App\Http\Requests\Commercial\Bill\BillUpdateFormRequest;
 use App\Models\Finance\Bill;
 use App\Models\Finance\Invoice;
-use App\Models\Finance\InvoiceAvoir;
 use Illuminate\Http\Request;
+use App\Services\Commercial\Taxes\TVACalulator;
 
 class BillController extends Controller
 {
+    use TVACalulator;
 
     public function index()
     {
         $bills = Bill::with('billable')->get();
 
-        return view('theme.pages.Commercial.Bill.__datatable.index', compact('bills'));
+        $invoices = Invoice::select('id', 'uuid', 'code', 'full_number', 'price_total')
+            ->doesntHave('bill')
+            ->get();
+
+        return view('theme.pages.Commercial.Bill.__datatable.index', compact('bills', 'invoices'));
     }
 
     public function create()
@@ -59,18 +65,34 @@ class BillController extends Controller
         return view('theme.pages.Commercial.Bill.__create.index', compact('invoice'));
     }
 
-    public function addBillAvoir(Request $request)
+    public function store(BillStoreFormRequest $request)
     {
 
-        validator($request->route()->parameters(), [
+        $invoice = Invoice::whereUuid($request->invoice)->firstOrFail();
 
-            'invoice' => ['required', 'uuid']
+        $newPrice = (float)$request->price_recu;
 
-        ])->validate();
+        $biller = [
+            'bill_date' => $request->date('bill_date'),
+            'bill_mode' => $request->bill_mode,
+            'reference' => $request->reference,
+            'notes' => $request->notes,
+            'price_ht' => $this->calculateOnlyTva($newPrice),
+            'price_tva' => $this->calculateOnlyTva($newPrice),
+            'price_total' => $newPrice,
+        ];
 
-        $invoice = InvoiceAvoir::whereUuid($request->invoice)->firstOrFail();
 
-        return view('theme.pages.Commercial.Bill.__create_avoir.index', compact('invoice'));
+        $invoice->bill()->create($biller);
+
+        if ($newPrice === (float)$invoice->price_total) {
+            
+            $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
+        } else {
+            $invoice->update(['status' => Response::INVOICE_PARTIAL, 'is_paid' => false]);
+        }
+
+        return redirect()->route('commercial:bills.index');
     }
 
     public function storeBill(BillFormRequest $request, Invoice $invoice)
@@ -89,26 +111,6 @@ class BillController extends Controller
         $invoice->bill()->create($biller);
 
         $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
-
-        return redirect()->route('commercial:bills.index');
-    }
-
-    public function storeBillAvoir(BillFormRequest $request, InvoiceAvoir $invoice)
-    {
-        //dd($request->all());
-        $biller = [
-            'bill_date' => $request->date('bill_date'),
-            'bill_mode' => $request->bill_mode,
-            'reference' => $request->reference,
-            'notes' => $request->notes,
-            'price_ht' => $invoice->price_ht,
-            'price_total' => $invoice->price_total,
-            'price_tva' => $invoice->price_tva,
-        ];
-
-        $invoice->bill()->create($biller);
-
-        $invoice->update(['status' => 'paid']);
 
         return redirect()->route('commercial:bills.index');
     }

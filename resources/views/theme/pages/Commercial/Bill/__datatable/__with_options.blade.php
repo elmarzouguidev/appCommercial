@@ -4,11 +4,13 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 mb-4">
-                        <a href="#{{--route('commercial:bills.create') --}}" type="button" class="btn btn-info">
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                            data-bs-target=".addPaymentToInvoice">
                             Ajouter un Règlement
-                        </a>
+                        </button>
                     </div>
                 </div>
+
                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                         <tr>
@@ -99,3 +101,4 @@
         </div>
     </div>
 </div>
+@include('theme.pages.Commercial.Bill.__datatable.add_bill')

@@ -1,4 +1,4 @@
-@if ($invoice->bill_count)
+@if ($invoice->status === App\Constants\Response::INVOICE_PAID && $invoice->bill_count)
 
     <div class="modal fade orderdetailsModal-{{ $invoice->id }}" tabindex="-1" role="dialog"
         aria-labelledby=orderdetailsModalLabel" aria-hidden="true">

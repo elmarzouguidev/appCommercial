@@ -17,16 +17,23 @@
 
                 @if (auth()->user()->hasAnyRole('Admin', 'SuperAdmin'))
                     <li class="menu-title" key="t-apps">{{ __('navbar.commercial') }}</li>
-
-
-                    <li>
-                        <a href="{{ route('commercial:estimates.index') }}" key="t-factures-devis">
-                            <i class="bx bx-file-blank"></i><span
-                                class="badge rounded-pill bg-warning float-end">{{ $estimates_not_send }}</span>
-
+                    {{--<li>
+                        <a href="{{ route('commercial:estimates.index') }}" class="waves-effect">
+                            <i class="bx bx-file-blank"></i>
+                            <span  key="t-estimates-devis" class="badge rounded-pill bg-warning float-end">{{ $estimates_not_send }}</span>
+                                
                             {{ __('navbar.estimates') }}
                         </a>
+                    </li>--}}
+                    <li>
+                        <a href="{{ route('commercial:estimates.index') }}" class="waves-effect">
+            
+                            <i class="bx bx-file-blank"></i>
+                            <span key="t-estimates">{{ __('navbar.estimates') }}</span>
+                        </a>
+            
                     </li>
+
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-food-menu"></i>
@@ -48,24 +55,32 @@
 
                         </ul>
                     </li>
+
                     <li>
-                        <a href="{{ route('commercial:bills.index') }}" key="t-factures-list">
+                        <a href="{{ route('commercial:bills.index') }}" class="waves-effect">
+            
                             <i class="bx bx-money"></i>
-                            Règlements
+                            <span key="t-payments">Règlements</span>
                         </a>
+            
                     </li>
 
                     <li>
-                        <a href="{{ route('commercial:bcommandes.index') }}" key="t-bc-list">
+                        <a href="{{ route('commercial:bcommandes.index') }}" class="waves-effect">
+            
                             <i class="bx bx-file"></i>
-                            {{ __('navbar.bc') }}
+                            <span key="t-bc">{{ __('navbar.bc') }}</span>
                         </a>
+            
                     </li>
+
                     <li>
-                        <a href="{{ route('commercial:providers.index') }}" key="t-factures-devis">
+                        <a href="{{ route('commercial:providers.index') }}" class="waves-effect">
+            
                             <i class="bx bx-user"></i>
-                            Fournisseurs
+                            <span key="t-providers">Fournisseurs</span>
                         </a>
+            
                     </li>
 
                     <li>

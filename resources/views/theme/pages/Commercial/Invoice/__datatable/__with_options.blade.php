@@ -75,21 +75,8 @@
                                     {{ $invoice->due_date->format('d-m-Y') }}
                                 </td>
                                 <td>
-                                    @php
-                                        $status = $invoice->status;
-                                        $textt = '';
-                                        $color = '';
-                                        if ($status === App\Constants\Response::INVOICE_PAID) {
-                                            $textt = 'PAYÉE';
-                                            $color = 'info';
-                                        } elseif ($status === App\Constants\Response::INVOICE_EN_ATTENTE) {
-                                            $textt = 'A régler';
-                                            $color = 'warning';
-                                        }
-                                    @endphp
-
-                                    <i class="mdi mdi-circle text-{{ $color }} font-size-10"></i>
-                                    {{ $textt }}
+                                    <i class="mdi mdi-circle text-info font-size-10"></i>
+                                    {{ __('response.status.'. $invoice->status) }}
                                 </td>
                                 <td>
                                     @if ($invoice->bill_count && $invoice->status === App\Constants\Response::INVOICE_PAID && !$invoice->avoir_count)
