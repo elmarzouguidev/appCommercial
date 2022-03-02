@@ -12,7 +12,8 @@ $(document).ready(function () {
     //Buttons examples
     var table = $('#datatable-buttons').DataTable({
         lengthChange: false,
-        buttons: ['copy', 'excel', 'pdf', 'colvis'],
+        //buttons: ['copy', 'excel', 'pdf', 'colvis'],
+        buttons: ['excel'],
         order: [[0, "desc"]]
     });
 
