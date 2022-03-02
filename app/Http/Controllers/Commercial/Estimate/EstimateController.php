@@ -131,6 +131,13 @@ class EstimateController extends Controller
         $estimate->save();
         $estimate->articles()->createMany($newArticles);
 
+        $estimate->histories()->create([
+            'user_id' => auth()->id(),
+            'user' => auth()->user()->full_name,
+            'detail' => 'A modifier le devis',
+            'action' => 'update'
+        ]);
+
         return redirect($estimate->edit_url)->with('success', "Le devis a été modifier avec success");
     }
 
@@ -219,8 +226,14 @@ class EstimateController extends Controller
             if (empty(Mail::failures())) {
 
                 $estimate->update(['is_send' => !$estimate->is_send]);
-                //$estimate->tickets()->attach($request->tickets);
-                //$estimate->tickets()->update(['status' => Status::EN_ATTENTE_DE_BON_DE_COMMAND]);
+                
+                $estimate->histories()->create([
+                    'user_id' => auth()->id(),
+                    'user' => auth()->user()->full_name,
+                    'detail' => 'A envoyer le devis pa mail',
+                    'action' => 'send'
+                ]);
+     
                 return redirect()->back()->with('success', 'Email was send');
             }
         }
