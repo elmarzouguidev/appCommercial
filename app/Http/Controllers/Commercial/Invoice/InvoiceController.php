@@ -115,13 +115,20 @@ class InvoiceController extends Controller
 
         $invoice->articles()->createMany($invoicesArticles);
 
+        $invoice->histories()->create([
+            'user_id' => auth()->id(),
+            'user' => auth()->user()->full_name,
+            'detail' => 'a crée la facture',
+            'action' => 'send'
+        ]);
+
         return redirect($invoice->edit_url)->with('success', "La Facture  a éte crée avec success");
     }
 
     public function edit(Invoice $invoice)
     {
 
-        $invoice->load('articles')->loadCount('bill');
+        $invoice->load('articles','histories')->loadCount('bill');
 
         return view('theme.pages.Commercial.Invoice.__edit.index', compact('invoice'));
     }
@@ -160,6 +167,12 @@ class InvoiceController extends Controller
         $invoice->save();
         $invoice->articles()->createMany($newArticles);
 
+        $invoice->histories()->create([
+            'user_id' => auth()->id(),
+            'user' => auth()->user()->full_name,
+            'detail' => 'a modifier la facture',
+            'action' => 'update'
+        ]);
 
         return redirect($invoice->edit_url)->with('success', "Le Facture a été modifier avec success");
     }
@@ -179,6 +192,14 @@ class InvoiceController extends Controller
                 ->delete();
                 
             $invoice->estimate()->update(['is_invoiced' => false]);
+
+            $invoice->histories()->create([
+                'user_id' => auth()->id(),
+                'user' => auth()->user()->full_name,
+                'detail' => 'a supprimer la facture',
+                'action' => 'delete'
+            ]);
+
             $invoice->delete();
 
             return redirect(route('commercial:invoices.index'))->with('success', "La Facture  a éte supprimer avec success");

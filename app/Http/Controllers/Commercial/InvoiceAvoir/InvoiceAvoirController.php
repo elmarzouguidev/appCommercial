@@ -106,7 +106,7 @@ class InvoiceAvoirController extends Controller
     public function edit(InvoiceAvoir $invoice)
     {
 
-        $invoice->load('articles');
+        $invoice->load('articles','histories');
 
         return view('theme.pages.Commercial.InvoiceAvoir.__edit.index', compact('invoice'));
     }

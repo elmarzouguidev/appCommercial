@@ -56,8 +56,10 @@
             <p class="card-title-desc">Historique :</p>
             <ul>
                 @foreach ($estimate->histories as $history)
-                    <li>{{ $history->user }} : {{ $history->detail }} :
-                        {{ $history->created_at->format('d-m-Y H:i:s') }}</li>
+                    <li>
+                        {{ $history->user }}  : {{ $history->detail }} :
+                        {{ $history->created_at->format('d-m-Y H:i:s') }}
+                    </li>
                 @endforeach
             </ul>
         </div>
