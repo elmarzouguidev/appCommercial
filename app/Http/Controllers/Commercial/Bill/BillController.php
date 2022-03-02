@@ -98,20 +98,27 @@ class BillController extends Controller
 
     public function storeBill(BillFormRequest $request, Invoice $invoice)
     {
-        //dd($request->all());
+        $newPrice = (float)$request->price_recu;
+
         $biller = [
             'bill_date' => $request->date('bill_date'),
             'bill_mode' => $request->bill_mode,
             'reference' => $request->reference,
             'notes' => $request->notes,
-            'price_ht' => $invoice->price_ht,
-            'price_total' => $invoice->price_total,
-            'price_tva' => $invoice->price_tva,
+            'price_ht' => $this->calculateOnlyTva($newPrice),
+            'price_tva' => $this->calculateOnlyTva($newPrice),
+            'price_total' => $newPrice,
         ];
+
 
         $invoice->bill()->create($biller);
 
-        $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
+        if ($newPrice === (float)$invoice->price_total) {
+
+            $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
+        } else {
+            $invoice->update(['status' => Response::INVOICE_PARTIAL, 'is_paid' => false]);
+        }
 
         return redirect()->route('commercial:bills.index');
     }
