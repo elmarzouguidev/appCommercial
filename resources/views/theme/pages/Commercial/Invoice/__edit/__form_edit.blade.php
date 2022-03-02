@@ -173,3 +173,6 @@
     </div>
 
 </div>
+@include('theme.pages.Commercial.Invoice.__datatable.__payment_detail_modal')
+
+@include('theme.pages.Commercial.Invoice.__datatable.__add_payment')
