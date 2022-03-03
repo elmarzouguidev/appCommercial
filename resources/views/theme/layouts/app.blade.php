@@ -20,8 +20,8 @@
     @livewireStyles
 
 </head>
-
-<body data-sidebar="dark">
+ 
+<body data-sidebar="dark" data-sidebar-size="small">
 
     <!-- Loader -->
     <div id="preloader">
@@ -38,7 +38,7 @@
     </div>
     <!-- <body data-layout="horizontal" data-topbar="dark"> -->
 
-    <div id="layout-wrapper">
+    <div id="layout-wrapper" >
 
         @include('theme.layouts._parts.__header')
 
