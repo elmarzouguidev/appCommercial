@@ -18,6 +18,7 @@
                         </div>
                     </div>
                 </div>
+                {{$errors}}
                 <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                         <tr>

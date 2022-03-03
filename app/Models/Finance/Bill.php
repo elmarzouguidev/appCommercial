@@ -21,9 +21,7 @@ class Bill extends Model
         'bill_mode',
         'reference',
         'notes',
-        'price_ht',
         'price_total',
-        'price_tva',
         'billable_id',
         'billable_type',
     ];
@@ -52,21 +50,11 @@ class Bill extends Model
         return $this->belongsTo(Client::class);
     }*/
 
-
-    public function getFormatedPriceHtAttribute()
-    {
-        return number_format($this->price_ht, 2);
-    }
-
     public function getFormatedPriceTotalAttribute()
     {
-        return number_format($this->price_total, 2);
+        return number_format($this->sum('price_total'), 2);
     }
 
-    public function getFormatedPriceTvaAttribute()
-    {
-        return number_format($this->price_tva, 2);
-    }
     public function getEditUrlAttribute()
     {
         return route('commercial:bills.edit', $this->uuid);

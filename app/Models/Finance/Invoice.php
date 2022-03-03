@@ -51,12 +51,12 @@ class Invoice extends Model
 
     public function histories()
     {
-        return $this->morphMany(History::class, 'historyable'); 
+        return $this->morphMany(History::class, 'historyable');
     }
 
     public function bill()
     {
-        return $this->morphOne(Bill::class, 'billable')->withDefault();
+        return $this->morphOne(Bill::class, 'billable');
     }
 
     public function getFormatedPriceHtAttribute()
@@ -196,6 +196,16 @@ class Invoice extends Model
     public function scopeDashboard(Builder $query)
     {
         return $query->select(['id', 'uuid', 'full_number', 'price_ht', 'price_tva', 'price_total', 'status', 'due_date', 'created_at']);
+    }
+
+    public function getBillablePrice()
+    {
+        if ($this->bill()->count() && $this->bill()->sum('price_total') > 0  && $this->bill()->sum('price_total') < $this->price_total) {
+            //dd('Ouii');
+            return $this->price_total - $this->bill()->sum('price_total');
+        } else {
+            return $this->price_total;
+        }
     }
 
     public static function boot()

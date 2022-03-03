@@ -21,11 +21,8 @@ class CreateBillsTable extends Migration
             $table->string('full_number')->unique();
 
             $table->string('reference')->nullable();
-
-            $table->float('price_ht')->default(0);
+            
             $table->float('price_total')->default(0);
-            $table->float('price_tva')->default(0);
-
             $table->string('status')->default('accepted');
             $table->string('bill_mode')->default('virement-bancaire');
 

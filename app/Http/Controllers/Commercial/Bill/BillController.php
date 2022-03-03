@@ -21,7 +21,7 @@ class BillController extends Controller
     {
         $bills = Bill::with('billable')->get();
 
-        $invoices = Invoice::select('id', 'uuid', 'code', 'full_number', 'price_total')
+        $invoices = Invoice::select('id', 'uuid', 'code', 'price_total')
             ->doesntHave('bill')
             ->doesntHave('avoir')
             ->get();
@@ -52,72 +52,58 @@ class BillController extends Controller
         return redirect()->route('commercial:bills.index');
     }
 
-    public function addBill(Request $request)
-    {
-
-        validator($request->route()->parameters(), [
-
-            'invoice' => ['required', 'uuid']
-
-        ])->validate();
-
-        $invoice = Invoice::whereUuid($request->invoice)->firstOrFail();
-
-        return view('theme.pages.Commercial.Bill.__create.index', compact('invoice'));
-    }
-
     public function store(BillStoreFormRequest $request)
     {
 
         $invoice = Invoice::whereUuid($request->invoice)->firstOrFail();
 
-        $newPrice = (float)$request->price_recu;
-
+        $newPrice = (int)$request->price_recu;
+        //dd($newPrice === (int)$invoice->price_total);
         $biller = [
             'bill_date' => $request->date('bill_date'),
             'bill_mode' => $request->bill_mode,
             'reference' => $request->reference,
             'notes' => $request->notes,
-            'price_ht' => $this->calculateOnlyTva($newPrice),
-            'price_tva' => $this->calculateOnlyTva($newPrice),
             'price_total' => $newPrice,
         ];
 
-
         $invoice->bill()->create($biller);
 
-        if ($newPrice === (float)$invoice->price_total) {
-
+        if ($invoice->bill()->count() && $invoice->bill()->sum('price_total') > 0  && $invoice->bill()->sum('price_total') < $invoice->price_total) {
+            //dd('Ouii');
+            $invoice->update(['status' => Response::INVOICE_PARTIAL]);
+        } elseif ($invoice->bill()->count() && $invoice->bill()->sum('price_total') > 0  && $invoice->bill()->sum('price_total') === $invoice->price_total) {
+            //dd('Ouiivvvv');
             $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
-        } else {
-            $invoice->update(['status' => Response::INVOICE_PARTIAL, 'is_paid' => false]);
         }
+
 
         return redirect()->route('commercial:bills.index');
     }
 
     public function storeBill(BillFormRequest $request, Invoice $invoice)
     {
-        $newPrice = (float)$request->price_recu;
+        $newPrice = (int)$request->price_recu;
+
+        // dd($newPrice , (int)$invoice->price_total);
 
         $biller = [
             'bill_date' => $request->date('bill_date'),
             'bill_mode' => $request->bill_mode,
             'reference' => $request->reference,
             'notes' => $request->notes,
-            'price_ht' => $this->calculateOnlyTva($newPrice),
-            'price_tva' => $this->calculateOnlyTva($newPrice),
             'price_total' => $newPrice,
         ];
 
 
         $invoice->bill()->create($biller);
 
-        if ($newPrice === (float)$invoice->price_total) {
-
+        if ($invoice->bill()->count() && $invoice->bill()->sum('price_total') > 0  && $invoice->bill()->sum('price_total') < $invoice->price_total) {
+            //dd('Ouii');
+            $invoice->update(['status' => Response::INVOICE_PARTIAL]);
+        } elseif ($invoice->bill()->count() && $invoice->bill()->sum('price_total') > 0  && $invoice->bill()->sum('price_total') === $invoice->price_total) {
+            //dd('Ouiivvvv');
             $invoice->update(['status' => Response::INVOICE_PAID, 'is_paid' => true]);
-        } else {
-            $invoice->update(['status' => Response::INVOICE_PARTIAL, 'is_paid' => false]);
         }
 
         return redirect()->route('commercial:bills.index');
