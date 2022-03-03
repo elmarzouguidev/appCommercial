@@ -16,7 +16,7 @@
                     <p class="mb-4">Référence de transaction : <span
                             class="text-primary">{{ optional($invoice->bill)->reference }}</span></p>
                     <p class="mb-4">Montant : <span
-                            class="text-primary">{{ optional($invoice->bill)->formated_total }} DH</span></p>
+                            class="text-primary">{{ $invoice->formated_price_total }} DH</span></p>
              
                 </div>
                 <div class="modal-footer">
