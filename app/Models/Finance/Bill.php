@@ -52,6 +52,11 @@ class Bill extends Model
 
     public function getFormatedPriceTotalAttribute()
     {
+        return number_format($this->price_total, 2);
+    }
+
+    public function getFormatedTotalAttribute()
+    {
         return number_format($this->sum('price_total'), 2);
     }
 
