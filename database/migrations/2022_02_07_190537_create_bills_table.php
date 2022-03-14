@@ -22,7 +22,7 @@ class CreateBillsTable extends Migration
 
             $table->string('reference')->nullable();
             
-            $table->float('price_total')->default(0);
+            $table->unsignedBigInteger('price_total')->default(0);
             $table->string('status')->default('accepted');
             $table->string('bill_mode')->default('virement-bancaire');
 

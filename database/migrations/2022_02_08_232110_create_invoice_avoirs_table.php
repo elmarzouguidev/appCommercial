@@ -22,9 +22,9 @@ class CreateInvoiceAvoirsTable extends Migration
 
             $table->string('invoice_number');
 
-            $table->float('price_ht')->default(0);
-            $table->float('price_total')->default(0);
-            $table->float('price_tva')->default(0);
+            $table->unsignedBigInteger('price_ht')->default(0);
+            $table->unsignedBigInteger('price_total')->default(0);
+            $table->unsignedBigInteger('price_tva')->default(0);
 
             $table->date('invoice_date');
             $table->date('due_date')->nullable();

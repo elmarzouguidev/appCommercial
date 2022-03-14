@@ -268,7 +268,6 @@
 
 
 
-
     <script type="text/php">
 
         if (isset($pdf) && $PAGE_COUNT > 1) {

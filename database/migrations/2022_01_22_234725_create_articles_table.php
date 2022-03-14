@@ -25,8 +25,8 @@ class CreateArticlesTable extends Migration
             $table->longText('designation');
             $table->longText('description')->nullable();
             $table->bigInteger('quantity')->default(0);
-            $table->float('prix_unitaire')->default(0);
-            $table->float('montant_ht')->default(0);
+            $table->unsignedBigInteger('prix_unitaire')->default(0);
+            $table->unsignedBigInteger('montant_ht')->default(0);
             //$table->string('taxe')->default('20%');
             $table->timestamps();
         });

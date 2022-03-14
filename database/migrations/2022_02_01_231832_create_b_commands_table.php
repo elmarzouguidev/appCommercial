@@ -20,9 +20,9 @@ class CreateBCommandsTable extends Migration
             $table->string('code')->unique();
             $table->string('full_number')->unique();
 
-            $table->float('price_ht')->nullable();
-            $table->float('price_total')->nullable();
-            $table->float('price_tva')->nullable();
+            $table->unsignedBigInteger('price_ht')->nullable();
+            $table->unsignedBigInteger('price_total')->nullable();
+            $table->unsignedBigInteger('price_tva')->nullable();
             $table->string('status')->default('approved');
 
             $table->date('date_command');
