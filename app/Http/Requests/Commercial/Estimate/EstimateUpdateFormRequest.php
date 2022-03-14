@@ -47,7 +47,7 @@ class EstimateUpdateFormRequest extends FormRequest
             'articles.*.designation' => ['required', 'string'],
             'articles.*.description' => ['nullable', 'string'],
             'articles.*.quantity' => ['required', 'integer'],
-            'articles.*.prix_unitaire' => ['required', 'numeric'],
+            'articles.*.prix_unitaire' => ['required', 'numeric','digits_between:1,20'],
         ];
     }
 }

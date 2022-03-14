@@ -24,7 +24,7 @@ class BillFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'price_recu' => ['required', 'numeric'],
+            'price_recu' => ['required', 'numeric','digits_between:1,20'],
             'bill_date' => ['required', 'date'],
             'bill_mode' => ['required', 'string'],
             'reference' => ['nullable', 'string'],
