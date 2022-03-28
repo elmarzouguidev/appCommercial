@@ -33,11 +33,11 @@ class AdminSeeder extends Seeder
         if (!$admin) {
 
             $newAdmin =  User::create($user);
-            $newAdmin->assignRole('SuperAdmin');
+            $newAdmin->assignRole('SuperAdmin','Developper');
 
         } else {
 
-            $admin->assignRole('SuperAdmin');
+            $admin->assignRole('SuperAdmin','Developper');
         }
     }
 }

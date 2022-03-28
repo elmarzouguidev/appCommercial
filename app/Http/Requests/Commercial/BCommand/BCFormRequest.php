@@ -26,7 +26,7 @@ class BCFormRequest extends FormRequest
         return [
 
             'provider' => ['required', 'integer'],
-      
+
             'date_command' => ['required', 'date', 'date_format:Y-m-d'],
 
             'admin_notes' => ['nullable', 'string'],
@@ -35,7 +35,7 @@ class BCFormRequest extends FormRequest
             'articles.*.designation' => ['required', 'string'],
             'articles.*.description' => ['nullable', 'string'],
             'articles.*.quantity' => ['required', 'integer'],
-            'articles.*.prix_unitaire' => ['required', 'numeric','digits_between:1,20'],
+            'articles.*.prix_unitaire' => ['required', 'numeric', 'digits_between:1,20'],
 
         ];
     }

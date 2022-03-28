@@ -7,7 +7,9 @@ use App\Http\Controllers\Commercial\Bill\BillController;
 use App\Http\Controllers\Commercial\Estimate\EstimateController;
 use App\Http\Controllers\Commercial\Invoice\InvoiceController;
 use App\Http\Controllers\Commercial\InvoiceAvoir\InvoiceAvoirController;
+use App\Http\Controllers\Commercial\Product\ProductController;
 use App\Http\Controllers\Commercial\Provider\ProviderController;
+use App\Http\Controllers\Commercial\Service\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'invoices', 'middleware' => 'role_or_permission:SuperAdmin|invoices.browse'], function () {
@@ -72,7 +74,6 @@ Route::group(['prefix' => 'bills'], function () {
 
         Route::get('/{invoice}', [BillController::class, 'addBill'])->name('bills.addBill');
         Route::post('/{invoice}', [BillController::class, 'storeBill'])->name('bills.storeBill');
-
     });
 
     Route::group(['prefix' => 'bill/invoice-avoir'], function () {
@@ -96,7 +97,7 @@ Route::group(['prefix' => 'estimates'], function () {
     Route::post('/create', [EstimateController::class, 'store'])->name('estimates.store');
     Route::delete('/', [EstimateController::class, 'deleteEstimate'])->name('estimates.delete');
 
-    Route::post('/send',[EstimateController::class,'sendEstimate'])->name('estimates.send');
+    Route::post('/send', [EstimateController::class, 'sendEstimate'])->name('estimates.send');
 
     Route::group(['prefix' => 'overview/estimate'], function () {
 
@@ -166,5 +167,20 @@ Route::group(['prefix' => 'bons-commands'], function () {
     Route::group(['prefix' => 'overview/order'], function () {
 
         Route::get('/{command}', [BCommandController::class, 'single'])->name('bcommandes.single');
+    });
+});
+
+Route::group(['prefix' => 'catalog'], function () {
+
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/', [ProductController::class, 'index'])->name('catalog.products');
+        Route::get('/create', [ProductController::class, 'create'])->name('catalog.products.create');
+        Route::post('/create', [ProductController::class, 'store'])->name('catalog.products.store');
+    });
+
+    Route::group(['prefix' => 'services'], function () {
+        Route::get('/', [ServiceController::class, 'index'])->name('catalog.services');
+        Route::get('/create', [ServiceController::class, 'create'])->name('catalog.services.create');
+        Route::post('/create', [ServiceController::class, 'store'])->name('catalog.services.store');
     });
 });
