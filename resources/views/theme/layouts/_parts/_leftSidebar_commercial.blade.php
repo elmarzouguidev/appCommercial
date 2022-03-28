@@ -26,6 +26,27 @@
                         </a>
                     </li>--}}
                     <li>
+                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                            <i class="bx bx-food-menu"></i>
+                            <span key="t-catalog">{{ __('Catalog') }}</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li>
+                                <a href="{{ route('commercial:catalog.products') }}" key="t-products-list">
+                                    <i class="bx bx-play"></i>
+                                    Products
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('commercial:catalog.services') }}" key="t-services-list">
+                                    <i class="bx bx-play"></i>
+                                    Services
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
                         <a href="{{ route('commercial:estimates.index') }}" class="waves-effect">
             
                             <i class="bx bx-file-blank"></i>
