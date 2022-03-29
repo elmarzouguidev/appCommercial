@@ -13,9 +13,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
-    @yield('css')
+  
     <!-- App Css-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
+
+    @yield('css')
 
     @livewireStyles
 
@@ -48,29 +50,21 @@
 
             <div class="page-content">
 
-                <div id="overlayy"></div>
-
                 @yield('content')
 
             </div>
-      
-            <!-- subscribeModal -->
 
-            {{-- @include('theme.layouts._parts._subscribe') --}}
 
-            <!-- end modal -->
-
+ 
             @include('theme.layouts._parts._footer')
 
         </div>
-
-        <!-- end main content-->
-
+        <main >
+            <div class="container">
+                @yield('sheet')
+            </div>
+        </main>
     </div>
-
-
-    {{-- @include('theme.layouts._parts._rightSidebar') --}}
-
 
     @include('theme.layouts._parts._overly')
 
@@ -79,6 +73,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
 
     @stack('scripts')
+
+    @yield('js')
 
 
 </body>

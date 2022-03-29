@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Sheet;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Sheet\SheetFormRequest;
 use App\Http\Requests\Sheet\SheetTableRequest;
 use App\Models\Sheet\Sheet;
 use Illuminate\Http\Request;
@@ -12,13 +13,16 @@ class SheetController extends Controller
 {
     public function index()
     {
-        return view('Home.index');
+        $sheets = Sheet::all();
+
+        return view('theme.pages.Sheet.index', compact('sheets'));
     }
 
-    public function create()
+    public function create(SheetFormRequest $request)
     {
         $sheet = Sheet::create([
-            'name' => 'Untitled spreadsheetdd'.Str::random(),
+            'name' => $request->name,
+            'description' => $request->description,
             'user_id' => auth()->id(),
             'content' => [[]]
         ]);
@@ -28,7 +32,7 @@ class SheetController extends Controller
 
     public function view(Sheet $sheet)
     {
-        return view('Home.spreadsheet', ['sheet' => $sheet]);
+        return view('theme.pages.Sheet.__view.spreadsheet', ['sheet' => $sheet]);
     }
 
     public function update(SheetTableRequest $request, Sheet $sheet)

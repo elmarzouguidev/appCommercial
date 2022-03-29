@@ -29,7 +29,7 @@ class CreateSheetsTable extends Migration
 
             $table->foreignId('category_id')
                 ->index()
-                ->nullOnDelete()
+                ->nullable()
                 ->constrained();
                 
 
