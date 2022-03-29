@@ -16,16 +16,16 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
 
             $table->id();
-            $table->uuid('uuid')->unique()->nullable();
-            $table->string('code')->unique()->nullable();
+            $table->uuid('uuid')->unique();
+            
+            $table->string('code')->unique();
+            $table->string('name')->unique();
+            $table->longText('description')->nullable();
 
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->mediumText('description')->nullable();
-            $table->string('logo')->nullable();
-
+            $table->unsignedBigInteger('parent_id')->nullable()->default(null);
+            $table->foreign('parent_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('set null');
+            $table->integer('order')->default(1);
             $table->boolean('active')->default(true);
-            $table->boolean('is_published')->default(true);
 
             $table->timestamps();
             $table->softDeletes();

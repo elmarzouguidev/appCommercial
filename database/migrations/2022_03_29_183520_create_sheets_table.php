@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+class CreateSheetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,30 @@ class CreateProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('sheets', function (Blueprint $table) {
             $table->id();
+
             $table->uuid('uuid')->unique();
             $table->string('code')->unique();
 
-            $table->string('name');
+            $table->string('name')->unique();
             $table->longText('description')->nullable();
-            $table->string('reference')->unique()->nullable();
-            $table->unsignedInteger('quantity_brut')->default(0);
-            $table->unsignedInteger('quantity_net')->default(0);
-            $table->unsignedBigInteger('buy_price')->default(0);
-            $table->unsignedBigInteger('sell_price')->default(0);
+            $table->longText('content');
+
+            $table->fullText(['name', 'description', 'content']);
+
+            $table->foreignId('user_id')->index()->nullable()->constrained();
+
+            $table->foreignId('category_id')
+                ->index()
+                ->nullOnDelete()
+                ->constrained();
+                
+
             $table->boolean('active')->default(true);
 
-            $table->softDeletes();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -39,6 +47,6 @@ class CreateProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('sheets');
     }
 }

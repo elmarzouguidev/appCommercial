@@ -11,20 +11,20 @@
                 <li>
                     <a href="{{ route('admin:home') }}" class="waves-effect">
                         <i class="bx bx-home-circle"></i>{{-- <span class="badge rounded-pill bg-info float-end">04</span> --}}
-                        {{--<span key="t-dashboards">{{ __('navbar.dashboard') }}</span>---}}
+                        {{-- <span key="t-dashboards">{{ __('navbar.dashboard') }}</span>- --}}
                     </a>
                 </li>
 
                 @if (auth()->user()->hasAnyRole('Admin', 'SuperAdmin'))
                     <li class="menu-title" key="t-apps">{{ __('navbar.commercial') }}</li>
-                    {{--<li>
+                    {{-- <li>
                         <a href="{{ route('commercial:estimates.index') }}" class="waves-effect">
                             <i class="bx bx-file-blank"></i>
                             <span  key="t-estimates-devis" class="badge rounded-pill bg-warning float-end">{{ $estimates_not_send }}</span>
                                 
                             {{ __('navbar.estimates') }}
                         </a>
-                    </li>--}}
+                    </li> --}}
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-food-menu"></i>
@@ -48,11 +48,11 @@
                     </li>
                     <li>
                         <a href="{{ route('commercial:estimates.index') }}" class="waves-effect">
-            
+
                             <i class="bx bx-file-blank"></i>
                             <span key="t-estimates">{{ __('navbar.estimates') }}</span>
                         </a>
-            
+
                     </li>
 
                     <li>
@@ -79,29 +79,29 @@
 
                     <li>
                         <a href="{{ route('commercial:bills.index') }}" class="waves-effect">
-            
+
                             <i class="bx bx-money"></i>
                             <span key="t-payments">Règlements</span>
                         </a>
-            
+
                     </li>
 
                     <li>
                         <a href="{{ route('commercial:bcommandes.index') }}" class="waves-effect">
-            
+
                             <i class="bx bx-file"></i>
                             <span key="t-bc">{{ __('navbar.bc') }}</span>
                         </a>
-            
+
                     </li>
 
                     <li>
                         <a href="{{ route('commercial:providers.index') }}" class="waves-effect">
-            
+
                             <i class="bx bx-user"></i>
                             <span key="t-providers">Fournisseurs</span>
                         </a>
-            
+
                     </li>
 
                     <li>
@@ -124,11 +124,11 @@
 
                 <li>
                     <a href="{{ route('admin:admins') }}" class="waves-effect">
-        
+
                         <i class="bx bx-user-circle"></i>
                         <span key="t-authentication">{{ __('navbar.authentification') }}</span>
                     </a>
-        
+
                 </li>
 
                 <li class="menu-title" key="t-components">{{ __('navbar.advanced') }}</li>
@@ -145,12 +145,12 @@
                         </li>
                     </ul>
                 </li>
-                
+
                 <li>
                     <a href="{{ route('admin:admins') }}" class="waves-effect">
                         <span key="t-settings">Settings</span>
                     </a>
-        
+
                 </li>
             </ul>
         </div>

@@ -50,6 +50,8 @@ class RouteServiceProvider extends ServiceProvider
 
             $this->adminRoutes();
             $this->commercialRoutes();
+            $this->sheetsRoutes();
+
             $this->devlopperRoutes();
 
         });
@@ -69,6 +71,15 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('login', function (Request $request) {
             return Limit::perMinute(4)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+
+    private function sheetsRoutes()
+    {
+        Route::middleware(['web'])
+            ->prefix('app/sheets')
+            ->name('sheet:')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/app-routes/sheets.php'));
     }
 
     private function adminRoutes()
