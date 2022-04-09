@@ -4,14 +4,16 @@ use App\Http\Controllers\Administration\Document\DocumentController;
 use App\Http\Controllers\Administration\Invoice\PDFBuilderController;
 use App\Http\Controllers\Commercial\BCommand\BCommandController;
 use App\Http\Controllers\Commercial\Bill\BillController;
-use App\Http\Controllers\Commercial\Catalog\BrandController;
-use App\Http\Controllers\Commercial\Catalog\CategoryController;
 use App\Http\Controllers\Commercial\Estimate\EstimateController;
 use App\Http\Controllers\Commercial\Invoice\InvoiceController;
 use App\Http\Controllers\Commercial\InvoiceAvoir\InvoiceAvoirController;
-use App\Http\Controllers\Commercial\Product\ProductController;
+
+use App\Http\Controllers\Commercial\Catalog\ProductController;
+use App\Http\Controllers\Commercial\Catalog\BrandController;
+use App\Http\Controllers\Commercial\Catalog\CategoryController;
+use App\Http\Controllers\Commercial\Catalog\ServiceController;
+
 use App\Http\Controllers\Commercial\Provider\ProviderController;
-use App\Http\Controllers\Commercial\Service\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'invoices', 'middleware' => 'role_or_permission:SuperAdmin|invoices.browse'], function () {

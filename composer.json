@@ -22,7 +22,6 @@
         "renatomarinho/laravel-page-speed": "^2.0",
         "spatie/laravel-backup": "^6.16",
         "spatie/laravel-medialibrary": "^9.0.0",
-        "spatie/laravel-multitenancy": "^2.0",
         "spatie/laravel-permission": "^5.4",
         "spatie/laravel-query-builder": "^4.0",
         "spatie/laravel-settings": "^2.3"
