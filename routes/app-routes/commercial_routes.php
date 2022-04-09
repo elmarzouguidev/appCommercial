@@ -201,5 +201,7 @@ Route::group(['prefix' => 'catalog'], function () {
         Route::get('/', [BrandController::class, 'index'])->name('catalog.brands');
         Route::get('/create', [BrandController::class, 'create'])->name('catalog.brands.create');
         Route::post('/create', [BrandController::class, 'store'])->name('catalog.brands.store');
+
+        Route::delete('/delete', [BrandController::class, 'delete'])->name('catalog.brands.delete');
     });
 });

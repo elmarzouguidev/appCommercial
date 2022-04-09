@@ -19,7 +19,6 @@ class CreateBrandsTable extends Migration
             $table->string('code')->unique();
 
             $table->string('name');
-            $table->string('slug')->unique();
             $table->string('logo')->nullable();
             $table->text('description')->nullable();
             $table->string('website')->nullable();

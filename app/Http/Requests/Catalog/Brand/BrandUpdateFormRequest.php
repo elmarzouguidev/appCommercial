@@ -3,9 +3,8 @@
 namespace App\Http\Requests\Catalog\Brand;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class BrandFormRequest extends FormRequest
+class BrandUpdateFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +13,7 @@ class BrandFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -25,8 +24,7 @@ class BrandFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', Rule::unique('brands')],
-            'description' => ['nullable', 'string']
+            //
         ];
     }
 }
