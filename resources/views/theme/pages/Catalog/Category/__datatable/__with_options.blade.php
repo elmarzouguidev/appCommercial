@@ -11,6 +11,8 @@
                     </div>
                 </div>
 
+                @include('theme.layouts._parts.__messages')
+                
                 <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                     <thead>
                         <tr>
@@ -66,7 +68,7 @@
                                     </div>
                                 </td>
                                 <form id="delete-category-{{ $category->uuid }}" method="post"
-                                    action="{{ route('commercial:bills.delete') }}">
+                                    action="{{ route('commercial:catalog.categories.delete') }}">
                                     @csrf
                                     @method('DELETE')
                                     <input type="hidden" name="categoryId" value="{{ $category->uuid }}">

@@ -190,6 +190,11 @@ Route::group(['prefix' => 'catalog'], function () {
         Route::get('/', [CategoryController::class, 'index'])->name('catalog.categories');
         Route::get('/create', [CategoryController::class, 'create'])->name('catalog.categories.create');
         Route::post('/create', [CategoryController::class, 'store'])->name('catalog.categories.store');
+
+        Route::get('/edit/{category}', [CategoryController::class, 'edit'])->name('catalog.categories.edit');
+        Route::post('/edit/{category}', [CategoryController::class, 'update'])->name('catalog.categories.update');
+
+        Route::delete('/delete', [CategoryController::class, 'delete'])->name('catalog.categories.delete');
     });
 
     Route::group(['prefix' => 'brands'], function () {
