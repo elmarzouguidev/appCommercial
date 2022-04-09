@@ -32,6 +32,18 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li>
+                                <a href="{{ route('commercial:catalog.categories') }}" key="t-categories-list">
+                                    <i class="bx bx-play"></i>
+                                    Catégories
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('commercial:catalog.brands') }}" key="t-brands-list">
+                                    <i class="bx bx-play"></i>
+                                    Marques
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ route('commercial:catalog.products') }}" key="t-products-list">
                                     <i class="bx bx-play"></i>
                                     Products

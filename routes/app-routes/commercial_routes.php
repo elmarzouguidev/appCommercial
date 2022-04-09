@@ -4,6 +4,8 @@ use App\Http\Controllers\Administration\Document\DocumentController;
 use App\Http\Controllers\Administration\Invoice\PDFBuilderController;
 use App\Http\Controllers\Commercial\BCommand\BCommandController;
 use App\Http\Controllers\Commercial\Bill\BillController;
+use App\Http\Controllers\Commercial\Catalog\BrandController;
+use App\Http\Controllers\Commercial\Catalog\CategoryController;
 use App\Http\Controllers\Commercial\Estimate\EstimateController;
 use App\Http\Controllers\Commercial\Invoice\InvoiceController;
 use App\Http\Controllers\Commercial\InvoiceAvoir\InvoiceAvoirController;
@@ -182,5 +184,17 @@ Route::group(['prefix' => 'catalog'], function () {
         Route::get('/', [ServiceController::class, 'index'])->name('catalog.services');
         Route::get('/create', [ServiceController::class, 'create'])->name('catalog.services.create');
         Route::post('/create', [ServiceController::class, 'store'])->name('catalog.services.store');
+    });
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', [CategoryController::class, 'index'])->name('catalog.categories');
+        Route::get('/create', [CategoryController::class, 'create'])->name('catalog.categories.create');
+        Route::post('/create', [CategoryController::class, 'store'])->name('catalog.categories.store');
+    });
+
+    Route::group(['prefix' => 'brands'], function () {
+        Route::get('/', [BrandController::class, 'index'])->name('catalog.brands');
+        Route::get('/create', [BrandController::class, 'create'])->name('catalog.brands.create');
+        Route::post('/create', [BrandController::class, 'store'])->name('catalog.brands.store');
     });
 });

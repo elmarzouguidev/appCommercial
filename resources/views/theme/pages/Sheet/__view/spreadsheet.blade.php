@@ -22,6 +22,7 @@
             minRows: 26,
             width: '100%',
             height: 'auto',
+            manualColumnResize: true,
     
             afterChange: function(change, source) {
                 if (source === 'loadData') return;
